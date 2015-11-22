@@ -98,23 +98,23 @@ public class ChooseComponentDialog extends Stage{
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         switch(type){
             case "paragraph":
-                ParagraphComponent pComp = new ParagraphComponent("");
+                ParagraphComponent pComp = new ParagraphComponent("new paragraph component");
                 page.addComponent(pComp);
                 break;
             case "list":
-                ListComponent lComp = new ListComponent();
+                ListComponent lComp = new ListComponent("new list component");
                 page.addComponent(lComp);
                 break;
             case "video":
-                VideoComponent vComp = new VideoComponent("");
+                VideoComponent vComp = new VideoComponent("new video component");
                 page.addComponent(vComp);
                 break;
             case "image":
-                ImageComponent iComp = new ImageComponent("");
+                ImageComponent iComp = new ImageComponent("new image component");
                 page.addComponent(iComp);
                 break;
             case "slideshow":
-                SlideShowComponent sComp = new SlideShowComponent("");
+                SlideShowComponent sComp = new SlideShowComponent("new slideshow component");
                 page.addComponent(sComp);
                 break;
             default:

@@ -292,6 +292,7 @@ public class EPortfolioView {
     public void reloadComponentWorkSpace(Page page){
         componentEditVBox.getChildren().clear();
         ComponentEditView newEdit = new ComponentEditView(page);
+        newEdit.reloadComponents();
         componentEditVBox.getChildren().add(newEdit);
     }
 }

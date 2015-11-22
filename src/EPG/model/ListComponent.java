@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class ListComponent extends Component{
     ArrayList<String> list;
-    public ListComponent() {
-        super("");
+    public ListComponent(String a) {
+        super(a);
         list = new ArrayList<String>();
     }
     

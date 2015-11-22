@@ -23,7 +23,7 @@ import properties_manager.PropertiesManager;
 public class PageEditView extends HBox{
     EPortfolioView ui; 
     Page page;
-    
+    ComponentEditView componentEditView;
     Label siteLabel;
     
     VBox captionVBox;
@@ -55,5 +55,8 @@ public class PageEditView extends HBox{
 	// CHOOSE THE STYLE
 	siteLabel.getStyleClass().add(CSS_CLASS_CAPTION_PROMPT);
 	captionTextField.getStyleClass().add(CSS_CLASS_CAPTION_TEXT_FIELD);
+        this.setOnMouseClicked(e->{
+            ui.reloadComponentWorkSpace(page);
+        });
     }
 }

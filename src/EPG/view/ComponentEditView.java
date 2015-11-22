@@ -95,7 +95,7 @@ public class ComponentEditView extends TabPane{
         siteViewer.setContent(webview);
         siteViewer.setText(props.getProperty(SITE_VIEWER));
         this.getTabs().add(editPage);
-        this.getTabs().add(siteViewer);        
+        this.getTabs().add(siteViewer);     
     }
 
     public void reloadComponents() {
@@ -103,7 +103,7 @@ public class ComponentEditView extends TabPane{
         Label siteName = new Label(page.getTitle());
         components.getChildren().add(siteName);
         for(Component comp:page.getComponents()){
-            ParagraphCompView a = new ParagraphCompView(comp);
+            ComponentView a = new ComponentView(comp,this);
             components.getChildren().add(a);
         }
     }
