@@ -7,6 +7,7 @@ package EPG.view;
 
 import static EPG.LanguagePropertyType.EDIT_COMPONENTS;
 import static EPG.LanguagePropertyType.SITE_VIEWER;
+import EPG.model.Component;
 import EPG.model.Page;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -98,6 +99,12 @@ public class ComponentEditView extends TabPane{
     }
 
     public void reloadComponents() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        components.getChildren().clear();
+        Label siteName = new Label(page.getTitle());
+        components.getChildren().add(siteName);
+        for(Component comp:page.getComponents()){
+            ParagraphCompView a = new ParagraphCompView(comp);
+            components.getChildren().add(a);
+        }
     }
 }
