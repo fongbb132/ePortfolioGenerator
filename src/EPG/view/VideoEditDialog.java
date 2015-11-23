@@ -31,6 +31,7 @@ public class VideoEditDialog extends EditDialog{
     public VideoEditDialog(Component c, ComponentEditView a) {
         super(c, a);
         videoComp = (VideoComponent)c;
+        initView();
     }
 
     @Override
@@ -40,6 +41,17 @@ public class VideoEditDialog extends EditDialog{
         selectVideo.setText("Select Video");
         selectVideo.setOnAction(e->{
             
+        });
+        
+        TextField width = new TextField();
+        width.setText(videoComp.getWidth()+"");
+        width.setOnKeyTyped(e->{
+            videoComp.setWidth(Integer.parseInt(width.getText()));
+        });
+        TextField height = new TextField();
+        height.setText(videoComp.getHeight()+"");
+        height.setOnKeyTyped(e->{
+            videoComp.setHeight(Integer.parseInt(height.getText()));
         });
         
         ObservableList<String> alignmentChoices = FXCollections.observableArrayList();
@@ -63,6 +75,10 @@ public class VideoEditDialog extends EditDialog{
         gridPane.add(alignment, 1, 1);
         gridPane.add(Caption, 0,2);
         gridPane.add(caption, 1,2);
-        gridPane.add(okButton, 1,3);
+        gridPane.add(new Label("Width: "), 0, 3);
+        gridPane.add(new Label("Height: "), 0,4);
+        gridPane.add(width, 1, 3);
+        gridPane.add(height, 1,4);
+        gridPane.add(okButton, 1,5);
     }
 }

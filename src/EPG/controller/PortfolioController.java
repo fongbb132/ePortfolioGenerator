@@ -28,4 +28,22 @@ public class PortfolioController {
         ePortfolio.addPages(page);
         ui.reloadPagePane();
     }
+    
+    public void processRemovePageRequest(){
+        EPortfolio eport = ui.getEPortfolio();
+        eport.removeSelectedPage();
+        ui.reloadPagePane();
+    }
+    
+    public void processMovePageUpRequest(){
+        EPortfolio eport = ui.getEPortfolio();
+        eport.moveSelectedPageUp();
+        ui.reloadPagePane();
+    }
+    
+    public void processMovePageDownRequest(){
+        EPortfolio eport = ui.getEPortfolio();
+        eport.moveSelectedPageDown();
+        ui.reloadPagePane();
+    }
 }

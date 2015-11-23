@@ -45,7 +45,7 @@ public abstract class EditDialog extends Stage{
 	// SPECIFY STYLE CLASSES
 	gridPane.getStyleClass().add(CSS_CLASS_LANG_DIALOG_PANE);
 	okButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
-	initView();
+	//initView();
 	// NOW SET THE SCENE IN THIS WINDOW
 	Scene scene = new Scene(gridPane);
 	scene.getStylesheets().add(STYLE_SHEET_UI);

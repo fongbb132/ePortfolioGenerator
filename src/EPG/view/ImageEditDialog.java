@@ -31,6 +31,7 @@ public class ImageEditDialog extends EditDialog {
     public ImageEditDialog(Component c, ComponentEditView a) {
         super(c, a);
         imgComp = (ImageComponent)c;
+        initView();
         updateImage();
     }
 
@@ -42,6 +43,17 @@ public class ImageEditDialog extends EditDialog {
         okButton = new Button();
         okButton.setText("OK");
         
+        
+        TextField width = new TextField();
+        width.setText(imgComp.getWidth()+"");
+        width.setOnKeyTyped(e->{
+            imgComp.setWidth(Integer.parseInt(width.getText()));
+        });
+        TextField height = new TextField();
+        height.setText(imgComp.getHeight()+"");
+        height.setOnKeyTyped(e->{
+            imgComp.setHeight(Integer.parseInt(height.getText()));
+        });
         
         ObservableList<String> alignmentChoices = FXCollections.observableArrayList();
         alignmentChoices.add("Left");
@@ -61,7 +73,11 @@ public class ImageEditDialog extends EditDialog {
         gridPane.add(caption, 1,2);
         gridPane.add(alignment, 1, 3);
         gridPane.add(alignmentText, 0, 3);
-        gridPane.add(okButton, 1,4);
+        gridPane.add(new Label("Width: "), 0, 4);
+        gridPane.add(new Label("Height: "), 0,5);
+        gridPane.add(width, 1, 4);
+        gridPane.add(height, 1,5);
+        gridPane.add(okButton, 1,6);
     }
     public void updateImage(){
         String imagePath = imgComp.getSrc();

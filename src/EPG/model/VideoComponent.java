@@ -13,9 +13,35 @@ public class VideoComponent extends Component{
     
     private String src;
     private String type = "v";
+    private String name;
+    private String caption;
+    private String alignment;
+    private int width;
+    private int height;
 
     public VideoComponent(String c) {
         super(c);
+        caption = "NO CAPTION";
+        name = "NO NAME";
+        alignment = "middle";
+        width = 800;
+        height = 600;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public VideoComponent(String link, String c) {
@@ -35,4 +61,27 @@ public class VideoComponent extends Component{
         return type;
     }
     
+    public void setName(String n ){
+        name = n;
+    }
+    
+    public void setCaption(String c){
+        caption = c;
+    }
+    
+    public void setAlignment(String a){
+        alignment = a;
+    }
+    
+    public String getAlignment(){
+        return alignment;
+    }
+    
+    public String getCaption(){
+        return caption;
+    }
+    
+    public String getName(){
+        return name;
+    }
 }

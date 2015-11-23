@@ -235,7 +235,7 @@ public class EPortfolioFileManager {
             jso = Json.createObjectBuilder()
                     .add(JSON_COMPONENT_CONTENT, ((SlideShowComponent)component).getTitle())
                     .add(JSON_COMPONENT_TYPE,((SlideShowComponent)component).getType())
-                    .add(JSON_SLIDESHOW, this.makeSlidesJsonArray(((SlideShowComponent)component).getSlides()))
+//                    .add(JSON_SLIDESHOW, this.makeSlidesJsonArray(((SlideShowComponent)component).getSlides()))
                     .build();
         }
         else{

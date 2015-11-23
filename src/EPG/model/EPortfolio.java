@@ -6,6 +6,7 @@
 package EPG.model;
 
 import EPG.LanguagePropertyType;
+import EPG.view.EPortfolioView;
 import java.util.ArrayList;
 import properties_manager.PropertiesManager;
 
@@ -21,8 +22,10 @@ public class EPortfolio {
     private String color = "";
     private String layout = "";
     private Page selectedPage;
-    public EPortfolio(String ePortName){
+    private EPortfolioView ui;
+    public EPortfolio(String ePortName,EPortfolioView a){
         name = ePortName;
+        ui = a;
     }
 
     public ArrayList<Page> getPages() {
@@ -90,6 +93,45 @@ public class EPortfolio {
 
     public void setSelectedPage(Page page){
         this.selectedPage = page;
+    }
+    
+    public void moveSelectedPageUp(){
+        if(isPageSelected()){
+            movePageUp(selectedPage);
+            ui.reloadPagePane();
+        }
+    }
+    
+    public void moveSelectedPageDown(){
+        if(isPageSelected()){
+            movePageDown(selectedPage);
+            ui.reloadPagePane();
+        }
+    }
+    
+    private void movePageUp(Page pageToMove){
+        int index = pages.indexOf(pageToMove);
+        if(index>0){
+            Page temp = pages.get(index);
+            pages.set(index, pages.get(index-1));
+            pages.set(index-1, temp);
+        }
+    }
+    public void removeSelectedPage() {
+	if (isPageSelected()) {
+	    pages.remove(selectedPage);
+	    selectedPage = null;
+	    ui.reloadPagePane();
+	}
+    }
+    
+    private void movePageDown(Page pageToMove) {
+	int index = pages.indexOf(pageToMove);
+	if (index < (pages.size()-1)) {
+	    Page temp = pages.get(index);
+	    pages.set(index, pages.get(index+1));
+	    pages.set(index+1, temp);
+	}
     }
     
 }

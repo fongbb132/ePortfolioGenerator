@@ -18,6 +18,7 @@ public class ParagraphEditDialog extends EditDialog {
     public ParagraphEditDialog(ParagraphComponent c, ComponentEditView a) {
         super(c,a);
         parag = c;
+        initView();
     }
     
     @Override

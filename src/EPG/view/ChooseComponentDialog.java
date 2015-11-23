@@ -117,7 +117,7 @@ public class ChooseComponentDialog extends Stage{
                 page.addComponent(iComp);
                 break;
             case "slideshow":
-                SlideShowComponent sComp = new SlideShowComponent("new slideshow component");
+                SlideShowComponent sComp = new SlideShowComponent("new slideshow component",null);
                 page.addComponent(sComp);
                 break;
             default:

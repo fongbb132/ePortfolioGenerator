@@ -22,7 +22,7 @@ public class StartupConstants {
     public static String PATH_IMAGES = "./images/";
     public static String PATH_ICONS = PATH_IMAGES + "icons/";
     public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
-    public static String PATH_CSS = "EPG/style/";
+    public static String PATH_CSS = "/EPG/style/";
     public static String STYLE_SHEET_UI = PATH_CSS + "StyleSheet.css";
 
     // HERE ARE THE LANGUAGE INDEPENDENT GUI ICONS
@@ -77,6 +77,7 @@ public class StartupConstants {
     public static String    CSS_CLASS_SLIDE_EDIT_VIEW = "slide_edit_view";
     public static String    CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW = "selected_slide_edit_view";
     public static String    CSS_CLASS_PAGE_EDIT_VIEW = "slide_edit_view";
+    public static String    CSS_CLASS_COMPONENT_SELECTED = "component_selected";
     // UI LABELS
     public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
     public static String    LABEL_LANGUAGE_SELECTION_PROMPT = "Select a Language:";

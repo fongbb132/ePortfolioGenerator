@@ -105,6 +105,9 @@
     -fx-font: 18pt bold;
 }
 
+.component_selected{
+    -fx-background-color:blue;
+}
 .title_text_field {
     -fx-font: 16pt normal;
     -fx-background-color: #C89E00;

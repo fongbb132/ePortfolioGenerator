@@ -5,6 +5,7 @@ package EPG.model;
  * and open the template in the editor.
  */
 
+import EPG.view.SlideShowEditDialog;
 import java.util.ArrayList;
 
 /**
@@ -12,36 +13,33 @@ import java.util.ArrayList;
  * @author wing
  */
 public class SlideShowComponent extends Component{
-    ArrayList<Slide> slides;
-    String title;
+    SlideShowModel slideshowModel;
     String type = "s";
     
-    public SlideShowComponent(String n){
+    public SlideShowComponent(String n,SlideShowEditDialog a){
         super(n);
-        title = n;
-        slides = new ArrayList<Slide>();
+        slideshowModel = new SlideShowModel(a);
     }
 
     public String getType(){
         return type;
     }
-    public ArrayList<Slide> getSlides() {
-        return slides;
+    public SlideShowModel getSlideShowModel() {
+        return slideshowModel;
     }
     
     public void addSlide(String initImageFileName,
 			 String initImagePath,
 			 String initCaption) {
-	Slide slideToAdd = new Slide(initImageFileName, initImagePath, initCaption);
-	slides.add(slideToAdd);
+	slideshowModel.addSlide(initImageFileName, initImagePath, initCaption);
     }
     
     public String getTitle() {
-        return title;
+        return slideshowModel.getTitle();
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        slideshowModel.setTitle(title);
     }
     
     

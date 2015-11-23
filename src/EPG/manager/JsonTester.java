@@ -15,7 +15,7 @@ public class JsonTester {
     static EPortfolio eportfolio;
     static String TEST_TITLE = "Ka Wing Fong";
     public static void main(String[] args) {
-	eportfolio = new EPortfolio(TEST_TITLE);
+	eportfolio = new EPortfolio(TEST_TITLE,null);
         
 	// ADD THREE SLIDES
         
@@ -23,31 +23,31 @@ public class JsonTester {
         ImageComponent pCom = new ImageComponent("http://www3.cs.stonybrook.edu/~richard/images/personal_pics/MeAndTheKid.jpg","video");
         ParagraphComponent tCom = new ParagraphComponent("The weather today is very nice. It's not a good day to do programming");
         hyperTextComponent hCom = new hyperTextComponent("There is the link showing you the weather today.", "http://www.weather.com/");
-        SlideShowComponent sCom = new SlideShowComponent("slideShow");
+        //SlideShowComponent sCom = new SlideShowComponent("slideShow");
         
-	sCom.addSlide("BryceCanyonUtah.jpg","BryceCanyonUtah.jpg","hello");
-	sCom.addSlide("CapeSpearNewfoundland.jpg","CapeSpearNewfoundland.jpg","hi");
-	sCom.addSlide("OregonTrailNebraska.jpg","OregonTrailNebraska.jpg","thank you");
+//	sCom.addSlide("BryceCanyonUtah.jpg","BryceCanyonUtah.jpg","hello");
+//	sCom.addSlide("CapeSpearNewfoundland.jpg","CapeSpearNewfoundland.jpg","hi");
+//	sCom.addSlide("OregonTrailNebraska.jpg","OregonTrailNebraska.jpg","thank you");
 	Page page = new Page("Site 1");
         page.addComponent(vCom);
         page.addComponent(pCom);
         page.addComponent(tCom);
         page.addComponent(hCom);
-        page.addComponent(sCom);
+//        page.addComponent(sCom);
         
         Page page1 = new Page("Site 2");
         page1.addComponent(vCom);
         page1.addComponent(pCom);
         page1.addComponent(tCom);
         page1.addComponent(hCom);
-        page1.addComponent(sCom);
+//        page1.addComponent(sCom);
 	
         Page page2 = new Page("Site 3");
         page2.addComponent(vCom);
         page2.addComponent(pCom);
         page2.addComponent(tCom);
         page2.addComponent(hCom);
-        page2.addComponent(sCom);
+//        page2.addComponent(sCom);
         
         	
         Page page3 = new Page("Site 4");
@@ -55,7 +55,7 @@ public class JsonTester {
         page3.addComponent(pCom);
         page3.addComponent(tCom);
         page3.addComponent(hCom);
-        page3.addComponent(sCom);
+//        page3.addComponent(sCom);
         
         	
         Page page4 = new Page("Site 5");
@@ -63,7 +63,7 @@ public class JsonTester {
         page4.addComponent(pCom);
         page4.addComponent(tCom);
         page4.addComponent(hCom);
-        page4.addComponent(sCom);
+        //page4.addComponent(sCom);
         
         eportfolio.addPages(page);
         eportfolio.addPages(page1);

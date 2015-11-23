@@ -104,7 +104,7 @@ public class EPortfolioView {
     private PortfolioController editController;
     public EPortfolioView(EPortfolioFileManager fileManager) {
         this.fileManager = fileManager;
-        ePortfolio = new EPortfolio("Untitled ePortfolio");
+        ePortfolio = new EPortfolio("Untitled ePortfolio",this);
         errorHandler = new ErrorHandler();
     }
 
@@ -136,7 +136,9 @@ public class EPortfolioView {
         totalPane.getStyleClass().add(CSS_CLASS_WORKSPACE);
         totalPane.setTop(fileToolbarPane);
         primaryScene = new Scene(totalPane);
-        primaryScene.getStylesheets().add(STYLE_SHEET_UI);
+        
+        String css = this.getClass().getResource(STYLE_SHEET_UI).toExternalForm();
+        primaryScene.getStylesheets().add(css);
         primaryStage.setScene(primaryScene);
         primaryStage.show();
     }
@@ -188,9 +190,17 @@ public class EPortfolioView {
         editController = new PortfolioController(this);
         addPageButton.setOnAction(e->{
             editController.processAddPageRequest();
-        
         });
-        
+        removeButton.setOnAction(e->{
+            editController.processRemovePageRequest();
+        });
+        movePageUpButton.setOnAction(e->{
+            editController.processMovePageUpRequest();
+        });
+        movePageDownButton.setOnAction(e->{
+            editController.processMovePageDownRequest();
+        });
+              
     }
     
     public void reloadPagePane(){
@@ -293,6 +303,7 @@ public class EPortfolioView {
         componentEditVBox.getChildren().clear();
         ComponentEditView newEdit = new ComponentEditView(page);
         newEdit.reloadComponents();
+        componentEditVBox.getStylesheets().add(STYLE_SHEET_UI);
         componentEditVBox.getChildren().add(newEdit);
     }
 }

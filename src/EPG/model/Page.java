@@ -15,6 +15,8 @@ import java.util.List;
 public class Page {
     ArrayList<Component> components;
     String title;
+    Component selectedComp;
+    boolean isSelected;
 
     public Page(String title) {
         components = new ArrayList<Component>();
@@ -40,6 +42,19 @@ public class Page {
         return components;//To change body of generated methods, choose Tools | Templates.
     }
 
+    public void setSelectedComp(Component c){
+        selectedComp = c;
+    }
     
+    public boolean isSelected(){
+        return selectedComp!=null;
+    }
     
+    public Component getSelectedComp(){
+        return selectedComp;
+    }
+
+    public void remove() {
+        components.remove(selectedComp);
+    }
 }
