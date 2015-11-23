@@ -247,10 +247,16 @@ public class EPortfolioView {
 	studentPane = new FlowPane();
 	studentLabel = new Label(labelPrompt);
 	studentTextField = new TextField();
-	
-	studentPane.getChildren().add(studentLabel);
-	studentPane.getChildren().add(studentTextField);
-	
+        
+        StyleEditPane stylePane = new StyleEditPane(ePortfolio);
+        studentPane.getChildren().add(stylePane);
+        
+	HBox hBox = new HBox();
+        
+        hBox.getChildren().add(studentLabel);
+        hBox.getChildren().add(studentTextField);
+	studentPane.getChildren().add(hBox);
+        
 	String studentPrompt = props.getProperty(LanguagePropertyType.LABEL_STUDENT_NAME);
 	studentTextField.setText(studentPrompt);
 	

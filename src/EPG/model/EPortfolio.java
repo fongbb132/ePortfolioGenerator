@@ -23,9 +23,28 @@ public class EPortfolio {
     private String layout = "";
     private Page selectedPage;
     private EPortfolioView ui;
+    private String header = "";
+    private String font="";
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
+    }
     public EPortfolio(String ePortName,EPortfolioView a){
         name = ePortName;
         ui = a;
+        
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public ArrayList<Page> getPages() {

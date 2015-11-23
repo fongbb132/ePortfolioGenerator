@@ -115,7 +115,7 @@ public final class ListEditDialog extends Stage{
                 String text = a.getText();
                 list.removeList(b,text);
             });
-            a.getStylesheets().add(CSS_CLASS_TITLE_TEXT_FIELD);
+            a.getStyleClass().add(CSS_CLASS_TITLE_TEXT_FIELD);
             textFieldList.getChildren().add(a);
         }
     }

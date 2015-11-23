@@ -122,10 +122,10 @@ public class ComponentEditView extends TabPane{
                 reloadComponents();
             });
             if(page.getSelectedComp()==comp){
-                a.getStylesheets().add(STYLE_SHEET_UI);
-                a.getStylesheets().add(CSS_CLASS_COMPONENT_SELECTED);
+                a.getStyleClass().add(STYLE_SHEET_UI);
+                a.getStyleClass().add(CSS_CLASS_COMPONENT_SELECTED);
             }else{
-                a.getStylesheets().add(CSS_CLASS_SLIDE_EDIT_VIEW);
+                a.getStyleClass().add(CSS_CLASS_SLIDE_EDIT_VIEW);
             }
             components.getChildren().add(a);
         }
