@@ -12,6 +12,7 @@ package EPG.model;
 public class ParagraphComponent extends Component {
     
     public String type = "t";
+    public String font = "default";
 
     public ParagraphComponent(String c) {
         super(c);
@@ -20,5 +21,12 @@ public class ParagraphComponent extends Component {
     public String getType(){
         return type;
     }
-    
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
+    }    
 }

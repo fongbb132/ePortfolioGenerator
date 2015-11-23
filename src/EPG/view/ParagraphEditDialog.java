@@ -6,6 +6,9 @@
 package EPG.view;
 
 import EPG.model.ParagraphComponent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
@@ -26,13 +29,25 @@ public class ParagraphEditDialog extends EditDialog {
 	hintLabel = new Label("Add Paragraph");
 	gridPane.add(hintLabel, 0,0);
         TextArea a = new TextArea();
-	gridPane.add(a, 0,1);
+        
+        Label fontLabel = new Label("Fonts: ");
+        ObservableList<String> fontChoices = FXCollections.observableArrayList();
+	fontChoices.add("Font 1");
+	fontChoices.add("Font 2");
+	fontChoices.add("Font 3");
+	fontChoices.add("Font 4");
+	fontChoices.add("Font 5");
+        
+        ComboBox fonts = new ComboBox(fontChoices);
+        gridPane.add(fontLabel, 0, 1);
+        gridPane.add(fonts, 1, 1);
+	gridPane.add(a, 0,2);
         okButton.setOnAction(e->{
            parag.setContent(a.getText());
            editView.reloadComponents();
            this.hide();
         });
-	gridPane.add(okButton, 0,2);
+	gridPane.add(okButton, 0,3);
     }
     
 }

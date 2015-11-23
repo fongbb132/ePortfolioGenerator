@@ -350,7 +350,7 @@ public class SlideShowEditDialog extends Stage{
 		slideEditor.getStyleClass().add(CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW);
 	    else
 		slideEditor.getStyleClass().add(CSS_CLASS_SLIDE_EDIT_VIEW);
-	    slidesEditorPane.getChildren().add(ssmPane);
+	    slidesEditorPane.getChildren().add(slideEditor);
 	    slideEditor.setOnMousePressed(e -> {
 		slideShow.setSelectedSlide(slide);
 		this.reloadSlideShowPane();

@@ -16,11 +16,11 @@ import EPG.view.SlideShowEditDialog;
 public class ImageSelectionController {
 
     public ImageSelectionController(SlideShowEditDialog ui) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void processSelectImage(Slide slide, SlideEditView aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
