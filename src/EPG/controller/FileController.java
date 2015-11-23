@@ -83,5 +83,21 @@ public class FileController {
         // HAD IN MIND IN THE FIRST PLACE
         return true;
     }
+
+    public void handleLoadSlideShowRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void handleSaveSlideShowRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void handleViewSlideShowRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void handleExitRequest() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

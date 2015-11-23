@@ -5,10 +5,22 @@
  */
 package EPG.controller;
 
+import EPG.model.Slide;
+import EPG.view.SlideEditView;
+import EPG.view.SlideShowEditDialog;
+
 /**
  *
  * @author wing
  */
 public class ImageSelectionController {
+
+    public ImageSelectionController(SlideShowEditDialog ui) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void processSelectImage(Slide slide, SlideEditView aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

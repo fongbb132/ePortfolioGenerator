@@ -11,6 +11,7 @@ package EPG.model;
  */
 public class Component {
     private String content = "";
+    String type = "";
 
     public Component(String c) {
         content = c;
@@ -25,5 +26,8 @@ public class Component {
     }
     
     
+    public String getType(){
+        return type;
+    }
     
 }

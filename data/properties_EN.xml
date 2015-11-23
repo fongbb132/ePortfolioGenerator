@@ -18,6 +18,7 @@
         <property name="TOOLTIP_EXIT"		    value="Exit the Application"></property>
 	<property name="TOOLTIP_ADD_SLIDE"	    value="Add Slide"></property>
 	<property name="TOOLTIP_REMOVE_SLIDE"	    value="Remove Slide"></property>
+	<property name="TOOLTIP_REMOVE"	    value="Remove"></property>
 	<property name="TOOLTIP_MOVE_UP"	    value="Move Slide Up"></property>
 	<property name="TOOLTIP_MOVE_DOWN"	    value="Move Slide Down"></property>
 	<property name="TOOLTIP_PREVIOUS_SLIDE"	    value="Previous Slide"></property>
@@ -31,13 +32,15 @@
 	<property name="VIDEO"  value="video"></property>
 	<property name="SLIDESHOW"  value="slideshow"></property>
 	<property name="LIST"  value="list"></property>
+        <property name="TOOLTIP_ADD_LIST_ITEM" value="add list item"></property>
         <property name="LABEL_COMPONENT_SELECTION_PROMPT" value="Select Component: "></property>
 	<!-- DEFAULT VALUES -->
 	<property name="DEFAULT_IMAGE_CAPTION"	    value="&lt;ENTER CAPTION&gt;"></property>
 	
 	<!-- UI LABELS -->
 	<property name="LABEL_CAPTION"		    value="Site Name:"></property>
-	<property name="LABEL_SLIDESHOW_TITLE"	    value="Student Name:"></property>
+	<property name="LABEL_STUDENT_NAME"	    value="Student Name:"></property>
+	<property name="LABEL_SLIDESHOW_TITLE"	    value="SlideShow Name:"></property>
 	<property name="LABEL_SAVE_UNSAVED_WORK"    value="Save unsaved work?"></property>
 	<property name="EDIT_COMPONENTS"            value="Edit Components"></property>
 	<property name="SITE_VIEWER"                value="Site Viewer"></property>

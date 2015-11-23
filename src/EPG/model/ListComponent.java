@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class ListComponent extends Component{
     ArrayList<String> list;
+    String type = "l";
     public ListComponent(String a) {
         super(a);
         list = new ArrayList<String>();
@@ -24,5 +25,16 @@ public class ListComponent extends Component{
     
     public void addList(String newItem){
         list.add(newItem);
+    }
+    
+    public void removeList(String a){
+        list.remove(a);
+    }
+
+
+    public void removeList(String b, String text) {
+        int index = list.indexOf(b);
+        list.remove(index);
+        list.add(index, text);
     }
 }

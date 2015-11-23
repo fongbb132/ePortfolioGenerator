@@ -37,6 +37,8 @@ public class StartupConstants {
     public static String ICON_VIEW_SLIDE_SHOW = "View.png";
     public static String ICON_EXIT = "Exit.png";
     public static String ICON_ADD_PAGE = "Add.png";
+    public static String ICON_ADD = "Add.png";
+    public static String ICON_REMOVE = "Remove.png";
     public static String ICON_REMOVE_PAGE = "Remove.png";
     public static String ICON_MOVE_UP = "MoveUp.png";
     public static String ICON_MOVE_DOWN = "MoveDown.png";

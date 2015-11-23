@@ -42,11 +42,6 @@ public abstract class EditDialog extends Stage{
 	
 	gridPane = new GridPane();
 	
-	okButton.setOnAction(e -> {
-	    c.setContent(textField.getText());
-	    this.hide();
-	});
-	
 	// SPECIFY STYLE CLASSES
 	gridPane.getStyleClass().add(CSS_CLASS_LANG_DIALOG_PANE);
 	okButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);

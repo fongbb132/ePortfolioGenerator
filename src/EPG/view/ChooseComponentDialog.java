@@ -15,7 +15,9 @@ import static EPG.StartupConstants.CSS_CLASS_LANG_COMBO_BOX;
 import static EPG.StartupConstants.CSS_CLASS_LANG_DIALOG_PANE;
 import static EPG.StartupConstants.CSS_CLASS_LANG_OK_BUTTON;
 import static EPG.StartupConstants.CSS_CLASS_LANG_PROMPT;
+import static EPG.StartupConstants.DEFAULT_SLIDE_IMAGE;
 import static EPG.StartupConstants.OK_BUTTON_TEXT;
+import static EPG.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
 import static EPG.StartupConstants.STYLE_SHEET_UI;
 import EPG.model.ImageComponent;
 import EPG.model.ListComponent;
@@ -111,6 +113,7 @@ public class ChooseComponentDialog extends Stage{
                 break;
             case "image":
                 ImageComponent iComp = new ImageComponent("new image component");
+                iComp.setSrc(PATH_SLIDE_SHOW_IMAGES+"/"+DEFAULT_SLIDE_IMAGE);
                 page.addComponent(iComp);
                 break;
             case "slideshow":

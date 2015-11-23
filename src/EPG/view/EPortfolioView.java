@@ -6,7 +6,7 @@
 package EPG.view;
 
 import EPG.LanguagePropertyType;
-import static EPG.LanguagePropertyType.LABEL_SLIDESHOW_TITLE;
+import static EPG.LanguagePropertyType.LABEL_STUDENT_NAME;
 import static EPG.LanguagePropertyType.TOOLTIP_ADD_PAGE;
 import static EPG.LanguagePropertyType.TOOLTIP_EXIT;
 import static EPG.LanguagePropertyType.TOOLTIP_LOAD_PORTFOLIO;
@@ -233,7 +233,7 @@ public class EPortfolioView {
 
     private void initTitleControls() {
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
-	String labelPrompt = props.getProperty(LABEL_SLIDESHOW_TITLE);
+	String labelPrompt = props.getProperty(LABEL_STUDENT_NAME);
 	studentPane = new FlowPane();
 	studentLabel = new Label(labelPrompt);
 	studentTextField = new TextField();
@@ -241,7 +241,7 @@ public class EPortfolioView {
 	studentPane.getChildren().add(studentLabel);
 	studentPane.getChildren().add(studentTextField);
 	
-	String studentPrompt = props.getProperty(LanguagePropertyType.LABEL_SLIDESHOW_TITLE);
+	String studentPrompt = props.getProperty(LanguagePropertyType.LABEL_STUDENT_NAME);
 	studentTextField.setText(studentPrompt);
 	
 	studentTextField.textProperty().addListener(e -> {

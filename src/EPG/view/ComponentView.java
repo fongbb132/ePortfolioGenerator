@@ -6,7 +6,11 @@
 package EPG.view;
 
 import EPG.model.Component;
+import EPG.model.ImageComponent;
+import EPG.model.ListComponent;
 import EPG.model.ParagraphComponent;
+import EPG.model.SlideShowComponent;
+import EPG.model.VideoComponent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -37,6 +41,22 @@ public class ComponentView extends VBox{
             if(comp instanceof ParagraphComponent){
                 ParagraphEditDialog a = new ParagraphEditDialog((ParagraphComponent)comp, componentEditView);
                 a.showAndWait();
+            }
+            if(comp instanceof ImageComponent){
+                ImageEditDialog a = new ImageEditDialog((ImageComponent)comp,componentEditView);
+                a.showAndWait();
+            }
+            if(comp instanceof VideoComponent){
+                VideoEditDialog a = new VideoEditDialog((VideoComponent)comp,componentEditView);
+                a.showAndWait();
+            }
+            if(comp instanceof ListComponent){
+                ListEditDialog a = new ListEditDialog((ListComponent)comp, componentEditView);
+                a.showAndWait();
+            }
+            if(comp instanceof SlideShowComponent){
+                SlideShowEditDialog a = new SlideShowEditDialog((SlideShowComponent)comp, componentEditView);
+                //a.showAndWait();
             }
         });
     }
