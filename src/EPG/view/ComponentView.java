@@ -87,6 +87,7 @@ public class ComponentView extends VBox{
         }
         editButton = new Button();
         editButton.setText("Edit");
+        editButton.getStyleClass().add("-fx-padding: 10 0 10 0");
         getChildren().add(editButton);
         this.componentEditView = compEdit;
         initEditButton();

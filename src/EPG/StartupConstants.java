@@ -34,6 +34,7 @@ public class StartupConstants {
     public static String ICON_LOAD_SLIDE_SHOW = "Load.png";
     public static String ICON_SAVE_SLIDE_SHOW = "Save.png";
     public static String ICON_SAVE_PORTFOLIO = "Save.png";
+    public static String ICON_SAVE_AS = "SaveAs.png";
     public static String ICON_SAVE_AS_PORTFOLIO = "SaveAs.png";
     public static String ICON_VIEW_SLIDE_SHOW = "View.png";
     public static String ICON_EXIT = "Exit.png";
@@ -71,7 +72,8 @@ public class StartupConstants {
     public static String    CSS_CLASS_TITLE_TEXT_FIELD = "title_text_field";
     public static String    CSS_CLASS_CAPTION_PROMPT = "caption_prompt";
     public static String    CSS_CLASS_CAPTION_TEXT_FIELD = "caption_text_field";
-    
+    public static String    CSS_CLASS_BACKGROUND = "background";
+    public static String    CSS_CLASS_SCROLLPANE = "scrollpane";
     // CSS - PANELS
     public static String    CSS_CLASS_WORKSPACE = "workspace";
     public static String    CSS_CLASS_SLIDES_EDITOR_PANE = "slides_editor_pane";

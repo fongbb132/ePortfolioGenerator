@@ -5,6 +5,8 @@
  */
 package EPG.view;
 
+import static EPG.StartupConstants.CSS_CLASS_LANG_COMBO_BOX;
+import static EPG.StartupConstants.CSS_CLASS_LANG_PROMPT;
 import static EPG.StartupConstants.ENGLISH_LANG;
 import EPG.controller.FileSelectionController;
 import EPG.model.EPortfolio;
@@ -30,10 +32,13 @@ public class StyleEditPane extends GridPane{
     public StyleEditPane(Page p) {
         this.page = p;
         initInterface();
+        this.setVgap(10);
+        this.setHgap(10);
     }
     
     public void initInterface(){
         Label bannerImage = new Label("Banner Image: ");
+        bannerImage.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
         Button selectImage = new Button();
         this.add(bannerImage, 0, 0);
         if(page.getBanner().equals("")){
@@ -49,7 +54,9 @@ public class StyleEditPane extends GridPane{
         });
         this.add(selectImage, 1,0);
         Label footer = new Label("Footer");
+        footer.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
         TextField footerField = new TextField();
+        footerField.getStyleClass().add("footer");
         footerField.setOnKeyReleased(e->{
             page.setFooter(footerField.getText());
         });
@@ -64,6 +71,8 @@ public class StyleEditPane extends GridPane{
 	layoutChoices.add("Layout 4");
 	layoutChoices.add("Layout 5");
         ComboBox layoutComboBox =  new ComboBox(layoutChoices);
+        layoutSelLabel.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
+        layoutComboBox.getStyleClass().add(CSS_CLASS_LANG_COMBO_BOX);
         layoutComboBox.setOnAction(e->{
             page.setLayout(layoutComboBox.getSelectionModel().getSelectedItem().toString());
         });
@@ -85,6 +94,8 @@ public class StyleEditPane extends GridPane{
             page.setColor(colorComboBox.getSelectionModel().getSelectedItem().toString());
         });
         
+        colorSelLabel.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
+        colorComboBox.getStyleClass().add(CSS_CLASS_LANG_COMBO_BOX);
         Label fontSelLabel = new Label("Select font: ");
         ObservableList<String> fontChoices = FXCollections.observableArrayList();
 	fontChoices.add("Font 1");
@@ -96,6 +107,9 @@ public class StyleEditPane extends GridPane{
         fontComboBox.setOnAction(e->{
             page.setFont(fontComboBox.getSelectionModel().getSelectedItem().toString());
         });
+        
+        fontSelLabel.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
+        fontComboBox.getStyleClass().add(CSS_CLASS_LANG_COMBO_BOX);
         add(fontSelLabel, 0,4);
         add(fontComboBox, 1,4);
             

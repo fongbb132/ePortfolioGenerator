@@ -16,6 +16,7 @@ import static EPG.LanguagePropertyType.TOOLTIP_MOVE_UP;
 import static EPG.LanguagePropertyType.TOOLTIP_NEW_PORTFOLIO;
 import static EPG.LanguagePropertyType.TOOLTIP_REMOVE_PAGE;
 import static EPG.LanguagePropertyType.TOOLTIP_SAVE_PORTFOLIO;
+import static EPG.StartupConstants.CSS_CLASS_BACKGROUND;
 import static EPG.StartupConstants.CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON;
 import static EPG.StartupConstants.CSS_CLASS_HORIZONTAL_TOOLBAR_PANE;
 import static EPG.StartupConstants.CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW;
@@ -34,6 +35,7 @@ import static EPG.StartupConstants.ICON_MOVE_DOWN;
 import static EPG.StartupConstants.ICON_MOVE_UP;
 import static EPG.StartupConstants.ICON_NEW_PORTFOLIO;
 import static EPG.StartupConstants.ICON_REMOVE_PAGE;
+import static EPG.StartupConstants.ICON_SAVE_AS;
 import static EPG.StartupConstants.ICON_SAVE_PORTFOLIO;
 import static EPG.StartupConstants.ICON_VIEW_SLIDE_SHOW;
 import static EPG.StartupConstants.PATH_ICONS;
@@ -85,6 +87,7 @@ public class EPortfolioView {
     Button loadPortfolioButton;
     Button savePortfolioButton;
     Button viewPortfolioButton;
+    Button saveAsButton;
     Button exitButton;
 
     BorderPane workspace;
@@ -143,7 +146,7 @@ public class EPortfolioView {
         primaryScene = new Scene(totalPane);
         
         String css = this.getClass().getResource(STYLE_SHEET_UI).toExternalForm();
-        primaryScene.getStylesheets().add(css);
+        primaryScene.getStylesheets().add(STYLE_SHEET_UI);
         primaryStage.setScene(primaryScene);
         primaryStage.show();
     }
@@ -156,6 +159,7 @@ public class EPortfolioView {
         newPortfolioButton = initChildButton(fileToolbarPane, ICON_NEW_PORTFOLIO, TOOLTIP_NEW_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         loadPortfolioButton = initChildButton(fileToolbarPane, ICON_LOAD_PORTFOLIO, TOOLTIP_LOAD_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         savePortfolioButton = initChildButton(fileToolbarPane, ICON_SAVE_PORTFOLIO, TOOLTIP_SAVE_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
+        saveAsButton = initChildButton(fileToolbarPane, ICON_SAVE_AS, TOOLTIP_SAVE_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         viewPortfolioButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW, SITE_VIEWER, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         exitButton = initChildButton(fileToolbarPane, ICON_EXIT, TOOLTIP_EXIT, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
     }
@@ -166,8 +170,8 @@ public class EPortfolioView {
         pageEditToolbar = new FlowPane();
         addPageButton = initChildButton(pageEditToolbar, ICON_ADD_PAGE, TOOLTIP_ADD_PAGE, CSS_CLASS_VERTICAL_TOOLBAR_BUTTON, true);
         removeButton = initChildButton(pageEditToolbar, ICON_REMOVE_PAGE, TOOLTIP_REMOVE_PAGE, CSS_CLASS_VERTICAL_TOOLBAR_BUTTON, true);
-        movePageUpButton = initChildButton(pageEditToolbar, ICON_MOVE_UP, TOOLTIP_MOVE_UP, CSS_CLASS_VERTICAL_TOOLBAR_BUTTON, true);
-        movePageDownButton = initChildButton(pageEditToolbar, ICON_MOVE_DOWN, TOOLTIP_MOVE_DOWN, CSS_CLASS_VERTICAL_TOOLBAR_BUTTON, true);
+        //movePageUpButton = initChildButton(pageEditToolbar, ICON_MOVE_UP, TOOLTIP_MOVE_UP, CSS_CLASS_VERTICAL_TOOLBAR_BUTTON, true);
+        //movePageDownButton = initChildButton(pageEditToolbar, ICON_MOVE_DOWN, TOOLTIP_MOVE_DOWN, CSS_CLASS_VERTICAL_TOOLBAR_BUTTON, true);
 
         pagesEditorPane = new VBox();
         pagesEditorScrollPane = new ScrollPane(pagesEditorPane);
@@ -177,6 +181,8 @@ public class EPortfolioView {
         centralPane = new HBox();
         centralPane.getChildren().add(pagesEditorScrollPane);
         componentEditVBox = new VBox();
+        componentEditVBox.getStyleClass().add(CSS_CLASS_BACKGROUND);
+        centralPane.getStyleClass().add(CSS_CLASS_BACKGROUND);
         centralPane.getChildren().add(componentEditVBox);
         workspace.setLeft(pageEditToolbar);
         workspace.setCenter(centralPane);
@@ -208,13 +214,6 @@ public class EPortfolioView {
         removeButton.setOnAction(e->{
             editController.processRemovePageRequest();
         });
-        movePageUpButton.setOnAction(e->{
-            editController.processMovePageUpRequest();
-        });
-        movePageDownButton.setOnAction(e->{
-            editController.processMovePageDownRequest();
-        });
-              
     }
     
     public void reloadPagePane(){
@@ -303,9 +302,7 @@ public class EPortfolioView {
 	// AND THE SLIDESHOW EDIT TOOLBAR
 	addPageButton.setDisable(false);
 	boolean slideSelected = ePortfolio.isPageSelected();
-	removeButton.setDisable(!slideSelected);
-	movePageUpButton.setDisable(!slideSelected);
-	movePageDownButton.setDisable(!slideSelected);	
+	removeButton.setDisable(!slideSelected);	
     }
 
     public EPortfolio getEPortfolio() {
@@ -319,8 +316,8 @@ public class EPortfolioView {
     public void reloadComponentWorkSpace(Page page){
         componentEditVBox.getChildren().clear();
         ComponentEditView newEdit = new ComponentEditView(page);
+        newEdit.getStylesheets().add(STYLE_SHEET_UI);
         newEdit.reloadComponents();
-        componentEditVBox.getStylesheets().add(STYLE_SHEET_UI);
         componentEditVBox.getChildren().add(newEdit);
     }
 }

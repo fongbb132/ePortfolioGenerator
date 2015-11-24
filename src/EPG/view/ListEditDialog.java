@@ -111,6 +111,7 @@ public final class ListEditDialog extends Stage{
         for(int i = 0; i< list.getList().size();i++){
             String b= list.getList().get(i);
             TextField a = new TextField(b);
+            a.getStyleClass().add("-fx-padding: 5 5 5 5");
             a.textProperty().addListener(e->{
                 String text = a.getText();
                 list.removeList(b,text);

@@ -5,11 +5,22 @@
  */
 package EPG.view;
 
+import EPG.LanguagePropertyType;
 import static EPG.LanguagePropertyType.EDIT_COMPONENTS;
 import static EPG.LanguagePropertyType.SITE_VIEWER;
+import static EPG.LanguagePropertyType.TOOLTIP_ADD_SLIDE;
+import static EPG.LanguagePropertyType.TOOLTIP_REMOVE;
+import static EPG.StartupConstants.CSS_CLASS_BACKGROUND;
 import static EPG.StartupConstants.CSS_CLASS_COMPONENT_SELECTED;
+import static EPG.StartupConstants.CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON;
+import static EPG.StartupConstants.CSS_CLASS_LANG_PROMPT;
+import static EPG.StartupConstants.CSS_CLASS_SCROLLPANE;
 import static EPG.StartupConstants.CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW;
 import static EPG.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;
+import static EPG.StartupConstants.CSS_CLASS_VERTICAL_TOOLBAR_BUTTON;
+import static EPG.StartupConstants.ICON_ADD;
+import static EPG.StartupConstants.ICON_REMOVE;
+import static EPG.StartupConstants.PATH_ICONS;
 import static EPG.StartupConstants.STYLE_SHEET_UI;
 import EPG.model.Component;
 import EPG.model.Page;
@@ -23,8 +34,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebEngine;
@@ -44,14 +59,16 @@ public class ComponentEditView extends TabPane{
     Button removeButton;
     Page page;
     Button addComponentButton;
-    ScrollPane scrollPane =new  ScrollPane(components);
-    private Object webView;
+    ScrollPane scrollPane ;
 
     public ComponentEditView(Page page) {
         Label siteName = new Label(page.getTitle());
+        scrollPane =new  ScrollPane(componentWorkspace);
+        scrollPane.getStyleClass().add(CSS_CLASS_BACKGROUND);
         initCompEditView();
         components.getChildren().add(siteName);
         this.page = page;
+        this.getStyleClass().add(CSS_CLASS_BACKGROUND);
         this.getStylesheets().add(STYLE_SHEET_UI);
     }
     
@@ -81,37 +98,37 @@ public class ComponentEditView extends TabPane{
     
     public void initCompEditView(){
         componentWorkspace = new BorderPane();
+        componentWorkspace.getStyleClass().add(CSS_CLASS_BACKGROUND);
         editPage = new Tab();
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         editPage.setText(props.getProperty(EDIT_COMPONENTS));
-        components = new VBox();
-        scrollPane.setContent(components);
-        addComponentButton = new Button();
         
-        addComponentButton.setText("add Component");
+        components = new VBox();
+        components.getStyleClass().add(CSS_CLASS_BACKGROUND);
+        scrollPane.setContent(components);
+        HBox componentToolbar = new HBox();
+        addComponentButton = initChildButton(componentToolbar,		ICON_ADD,	    "Add Component",	    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON,  false);
+        
+        removeButton = initChildButton(componentToolbar,		ICON_REMOVE,	    "Remove Component",	    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON,  false);
+        
         addComponentButton.setOnAction(e->{
             ChooseComponentDialog chooseComponent = new ChooseComponentDialog(page, this);
             chooseComponent.show();
         });
         removeButton = new Button();
         removeButton.setText("Remove");
-        Button saveButton = new Button();
-        saveButton.setText("Save site");
-        saveButton.setOnAction(e->{
-            
-        });
-        HBox componentToolbar = new HBox();
-        componentToolbar.getChildren().add(addComponentButton);
-        componentToolbar.getChildren().add(removeButton);
-        componentToolbar.getChildren().add(saveButton);
+        
+        
         componentWorkspace.setTop(componentToolbar);
         componentWorkspace.setCenter(scrollPane);
+        componentWorkspace.getStyleClass().add("root");
         editPage.setContent(componentWorkspace);
         siteViewer = new Tab();
         webview = new WebView();
+        webview.getStyleClass().add(CSS_CLASS_BACKGROUND);
         
 	scrollPane = new ScrollPane(webview);
-	
+	scrollPane.getStyleClass().add(CSS_CLASS_BACKGROUND);
 	// GET THE URL
 	String indexPath = "./sites/public_html/Site 2.html";
         System.out.println(indexPath);
@@ -128,7 +145,6 @@ public class ComponentEditView extends TabPane{
 	webEngine.load(indexURL.toExternalForm());
 	webEngine.setJavaScriptEnabled(true);
 	
-        
         removeButton.setOnAction(e->{
             page.remove();
             reloadComponents();
@@ -145,6 +161,7 @@ public class ComponentEditView extends TabPane{
     public void reloadComponents() {
         components.getChildren().clear();
         Label siteName = new Label(page.getTitle());
+        siteName.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
         components.getChildren().add(siteName);
         StyleEditPane stylePane = new StyleEditPane(page);
         components.getChildren().add(stylePane);
@@ -156,11 +173,30 @@ public class ComponentEditView extends TabPane{
             });
             if(page.getSelectedComp()==comp){
                 a.getStyleClass().add(STYLE_SHEET_UI);
-                a.getStyleClass().add(CSS_CLASS_COMPONENT_SELECTED);
+                a.getStyleClass().add("component_selected");
             }else{
-                a.getStyleClass().add(CSS_CLASS_SLIDE_EDIT_VIEW);
+                a.getStyleClass().add("component_view");
             }
             components.getChildren().add(a);
         }
+    }
+    
+    public Button initChildButton(
+	    Pane toolbar, 
+	    String iconFileName, 
+	    String tooltip, 
+	    String cssClass,
+	    boolean disabled) {
+	PropertiesManager props = PropertiesManager.getPropertiesManager();
+	String imagePath = "file:" + PATH_ICONS + iconFileName;
+	Image buttonImage = new Image(imagePath);
+	Button button = new Button();
+	button.getStyleClass().add(cssClass);
+	button.setDisable(disabled);
+	button.setGraphic(new ImageView(buttonImage));
+	Tooltip buttonTooltip = new Tooltip(tooltip);
+	button.setTooltip(buttonTooltip);
+	toolbar.getChildren().add(button);
+	return button;
     }
 }
