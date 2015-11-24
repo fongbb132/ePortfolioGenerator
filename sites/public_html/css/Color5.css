@@ -1,0 +1,44 @@
+/* Initial body */
+body {
+  background: #00256E;
+}
+
+.page h2,.page p ,#slideshow_controls h, #slideshow_controls h2{
+  color:#FFFF90 ;
+}
+
+.page h2,#slideshow_controls h, #slideshow_controls h2{
+  color:#FFFF90 ;
+}
+
+.menu {
+  background: #00256E;
+}
+
+.menu a {
+  color: #FFFF90;
+}
+
+
+.footer {
+  background-color: #29527B ;
+}
+
+.eportfolio_name{
+  color: #FFFF90;
+}
+
+a{
+    color:pink; 
+}
+
+a:hover{
+    color:white;
+}
+
+.menu li {
+  border-bottom: 1px solid white;
+}
+
+.menu ul{
+}

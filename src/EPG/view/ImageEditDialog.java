@@ -7,6 +7,7 @@ package EPG.view;
 
 import EPG.LanguagePropertyType;
 import static EPG.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
+import EPG.controller.FileSelectionController;
 import EPG.handler.ErrorHandler;
 import EPG.model.Component;
 import EPG.model.ImageComponent;
@@ -39,31 +40,30 @@ public class ImageEditDialog extends EditDialog {
     public void initView() {
         Label image = new Label("Image");
         imageView = new ImageView();
+        imageView.setOnMouseClicked(e->{
+           FileSelectionController a = new FileSelectionController();
+           a.processFile();
+        });
         TextField caption = new TextField("Enter Caption");
         okButton = new Button();
         okButton.setText("OK");
-        
-        
         TextField width = new TextField();
         width.setText(imgComp.getWidth()+"");
-        width.setOnKeyTyped(e->{
-            imgComp.setWidth(Integer.parseInt(width.getText()));
-        });
         TextField height = new TextField();
         height.setText(imgComp.getHeight()+"");
-        height.setOnKeyTyped(e->{
-            imgComp.setHeight(Integer.parseInt(height.getText()));
-        });
-        
         ObservableList<String> alignmentChoices = FXCollections.observableArrayList();
         alignmentChoices.add("Left");
         alignmentChoices.add("Middle");
         alignmentChoices.add("Right");
-        
+        caption.setText(imgComp.getCaption());
         ComboBox alignment = new ComboBox(alignmentChoices);
         Label alignmentText = new Label("Alignment");
         Label Caption = new Label("Caption");
         okButton.setOnAction(e->{
+           imgComp.setAlignment(alignment.getSelectionModel().getSelectedItem().toString());
+           imgComp.setCaption(caption.getText());
+           imgComp.setWidth(Integer.parseInt(width.getText()));
+           imgComp.setHeight(Integer.parseInt(height.getText()));
            editView.reloadComponents();
            this.hide();
         });

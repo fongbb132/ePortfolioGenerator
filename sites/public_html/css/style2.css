@@ -1,0 +1,123 @@
+/* Initial body */
+body {
+  left: 0;
+  margin: 0;
+  position: relative;
+}
+
+.eportfolio_name{
+  right: 50px;
+  font-size: 35px;
+}
+
+.post-content{
+    right: 30px;
+    text-align: right;
+}
+
+
+.page h2,#slideshow_controls h, #slideshow_controls h2{
+  text-align: center;
+}
+
+.page {
+  text-align:center;
+}
+/* Initial menu */
+.menu {
+  right: 0px;  /* start off behind the scenes */
+  overflow: hidden;
+  position: absolute;
+  width: 200px;
+}
+
+/*portfolio name*/
+.post-content {
+    top:0;
+    left:0;
+    position: absolute;
+}
+
+.banner img{
+    width: 100%;
+
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li{
+  line-height: 45px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 3px;
+}
+
+
+.menu a {
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.page{
+    padding-right:210px;
+    padding-bottom: 30px;
+}
+
+.footer { 
+  width:100%; 
+  text-align: center;
+  bottom:0px;
+}
+
+#content {
+    left:10px;
+    top:10px;
+    width:1000px;
+}
+
+#slide_caption{
+    position:absolute;
+    left:0px;  
+    width:1000px;
+    padding-left: 10px;
+    padding-right: 10px;  
+}
+
+#slideshow_title {
+    top:0px;
+    font-size: 28pt;
+    font-weight: bold;
+}
+
+#slide_img{
+  text-align: center;
+}
+
+#slide_caption {
+    top:580px;
+    font-size:24pt;
+    text-align:center;
+}
+
+#play_pause_button{
+  padding-left: 10px;
+}
+
+#previous_button{
+  padding-left: 10px;
+
+}
+#next_button{
+  padding-left: 10px;
+
+}
+#slideshow_controls{
+    padding-right:200px;
+    width: 100%;
+    padding-bottom: 80px;
+}

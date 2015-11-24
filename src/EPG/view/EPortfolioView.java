@@ -7,6 +7,7 @@ package EPG.view;
 
 import EPG.LanguagePropertyType;
 import static EPG.LanguagePropertyType.LABEL_STUDENT_NAME;
+import static EPG.LanguagePropertyType.SITE_VIEWER;
 import static EPG.LanguagePropertyType.TOOLTIP_ADD_PAGE;
 import static EPG.LanguagePropertyType.TOOLTIP_EXIT;
 import static EPG.LanguagePropertyType.TOOLTIP_LOAD_PORTFOLIO;
@@ -34,6 +35,7 @@ import static EPG.StartupConstants.ICON_MOVE_UP;
 import static EPG.StartupConstants.ICON_NEW_PORTFOLIO;
 import static EPG.StartupConstants.ICON_REMOVE_PAGE;
 import static EPG.StartupConstants.ICON_SAVE_PORTFOLIO;
+import static EPG.StartupConstants.ICON_VIEW_SLIDE_SHOW;
 import static EPG.StartupConstants.PATH_ICONS;
 import static EPG.StartupConstants.STYLE_SHEET_UI;
 import EPG.controller.FileController;
@@ -42,6 +44,9 @@ import EPG.handler.ErrorHandler;
 import EPG.manager.EPortfolioFileManager;
 import EPG.model.EPortfolio;
 import EPG.model.Page;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -151,6 +156,7 @@ public class EPortfolioView {
         newPortfolioButton = initChildButton(fileToolbarPane, ICON_NEW_PORTFOLIO, TOOLTIP_NEW_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         loadPortfolioButton = initChildButton(fileToolbarPane, ICON_LOAD_PORTFOLIO, TOOLTIP_LOAD_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         savePortfolioButton = initChildButton(fileToolbarPane, ICON_SAVE_PORTFOLIO, TOOLTIP_SAVE_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
+        viewPortfolioButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW, SITE_VIEWER, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         exitButton = initChildButton(fileToolbarPane, ICON_EXIT, TOOLTIP_EXIT, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
     }
 
@@ -186,6 +192,14 @@ public class EPortfolioView {
         fileController = new FileController(this, fileManager);
         newPortfolioButton.setOnAction(e->{
             fileController.handleNewSlideShowRequest();
+        });
+        viewPortfolioButton.setOnAction(e->{
+            SiteViewer siteView = new SiteViewer(this);
+            try {
+                siteView.startSiteView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         editController = new PortfolioController(this);
         addPageButton.setOnAction(e->{
@@ -247,10 +261,7 @@ public class EPortfolioView {
 	studentPane = new FlowPane();
 	studentLabel = new Label(labelPrompt);
 	studentTextField = new TextField();
-        
-        StyleEditPane stylePane = new StyleEditPane(ePortfolio);
-        studentPane.getChildren().add(stylePane);
-        
+                
 	HBox hBox = new HBox();
         
         hBox.getChildren().add(studentLabel);

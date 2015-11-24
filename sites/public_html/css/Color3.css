@@ -1,0 +1,44 @@
+/* Initial body */
+body {
+  background: #14C4FF;
+}
+
+.page h2,.page p ,#slideshow_controls h, #slideshow_controls h2{
+  color:#990033 ;
+}
+
+.page h2,#slideshow_controls h, #slideshow_controls h2{
+  color:#990033 ;
+}
+
+.menu {
+  background:#14C4FF;
+}
+
+.menu li {
+}
+
+.menu ul{
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+
+.menu a {
+  color:#990033;
+}
+.menu a:hover {
+  color:black;
+}
+.footer {
+  background-color: #6E93FF ;
+}
+
+
+a{
+    color:blue;
+}
+
+a:hover{
+    color:pink;
+}

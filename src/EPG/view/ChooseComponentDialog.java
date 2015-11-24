@@ -19,6 +19,7 @@ import static EPG.StartupConstants.DEFAULT_SLIDE_IMAGE;
 import static EPG.StartupConstants.OK_BUTTON_TEXT;
 import static EPG.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
 import static EPG.StartupConstants.STYLE_SHEET_UI;
+import EPG.model.HeadingComponent;
 import EPG.model.ImageComponent;
 import EPG.model.ListComponent;
 import EPG.model.Page;
@@ -59,6 +60,7 @@ public class ChooseComponentDialog extends Stage{
 	
 	// INIT THE LANGUAGE CHOICES
 	ObservableList<String> languageChoices = FXCollections.observableArrayList();
+	languageChoices.add("Heading");
 	languageChoices.add(props.getProperty(PARAGRAPH));
 	languageChoices.add(props.getProperty(IMAGE));
 	languageChoices.add(props.getProperty(VIDEO));
@@ -99,6 +101,10 @@ public class ChooseComponentDialog extends Stage{
     public void addComponent(String type){
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         switch(type){
+            case "Heading":
+                HeadingComponent hComp = new HeadingComponent("new Heading");
+                page.addComponent(hComp);
+                break;
             case "paragraph":
                 ParagraphComponent pComp = new ParagraphComponent("new paragraph component");
                 page.addComponent(pComp);

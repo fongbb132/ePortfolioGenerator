@@ -22,7 +22,7 @@ public class VideoComponent extends Component{
     public VideoComponent(String c) {
         super(c);
         caption = "NO CAPTION";
-        name = "NO NAME";
+        name = "";
         alignment = "middle";
         width = 800;
         height = 600;

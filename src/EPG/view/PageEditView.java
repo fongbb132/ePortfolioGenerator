@@ -33,7 +33,6 @@ public class PageEditView extends HBox{
         page = initPage;
         this.getStyleClass().add(CSS_CLASS_PAGE_EDIT_VIEW);
 	captionVBox = new VBox();
-        
        
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
 	siteLabel = new Label(props.getProperty(LanguagePropertyType.LABEL_CAPTION));

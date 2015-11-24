@@ -6,7 +6,9 @@
 package EPG.view;
 
 import static EPG.StartupConstants.ENGLISH_LANG;
+import EPG.controller.FileSelectionController;
 import EPG.model.EPortfolio;
+import EPG.model.Page;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -14,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -22,10 +25,10 @@ import javafx.stage.Stage;
  * @author Ka Wing Fong
  */
 public class StyleEditPane extends GridPane{
-    EPortfolio portfolio;
+    Page page;
 
-    public StyleEditPane(EPortfolio portfolio) {
-        this.portfolio = portfolio;
+    public StyleEditPane(Page p) {
+        this.page = p;
         initInterface();
     }
     
@@ -33,12 +36,22 @@ public class StyleEditPane extends GridPane{
         Label bannerImage = new Label("Banner Image: ");
         Button selectImage = new Button();
         this.add(bannerImage, 0, 0);
-        selectImage.setText("Choose Image");
+        if(page.getBanner().equals("")){
+            selectImage.setText("Choose Image");
+        }else{
+            selectImage.setText(page.getBanner());
+        }
+        
+        selectImage.setOnAction(e->{
+           FileSelectionController a = new FileSelectionController();
+           page.setBanner(a.processFileToString());
+           selectImage.setText(page.getBanner());
+        });
         this.add(selectImage, 1,0);
         Label footer = new Label("Footer");
-        TextArea footerField = new TextArea();
+        TextField footerField = new TextField();
         footerField.setOnKeyReleased(e->{
-            portfolio.setFooter(footerField.getText());
+            page.setFooter(footerField.getText());
         });
         add(footer, 0,1);
         add(footerField, 1,1);
@@ -52,7 +65,7 @@ public class StyleEditPane extends GridPane{
 	layoutChoices.add("Layout 5");
         ComboBox layoutComboBox =  new ComboBox(layoutChoices);
         layoutComboBox.setOnAction(e->{
-            portfolio.setLayout(layoutComboBox.getSelectionModel().getSelectedItem().toString());
+            page.setLayout(layoutComboBox.getSelectionModel().getSelectedItem().toString());
         });
         
         add(layoutSelLabel, 0,2);
@@ -69,7 +82,7 @@ public class StyleEditPane extends GridPane{
         add(colorSelLabel, 0,3);
         add(colorComboBox, 1,3);
         colorComboBox.setOnAction(e->{
-            portfolio.setColor(colorComboBox.getSelectionModel().getSelectedItem().toString());
+            page.setColor(colorComboBox.getSelectionModel().getSelectedItem().toString());
         });
         
         Label fontSelLabel = new Label("Select font: ");
@@ -81,11 +94,10 @@ public class StyleEditPane extends GridPane{
 	fontChoices.add("Font 5");
         ComboBox fontComboBox =  new ComboBox(fontChoices);
         fontComboBox.setOnAction(e->{
-            portfolio.setFont(fontComboBox.getSelectionModel().getSelectedItem().toString());
+            page.setFont(fontComboBox.getSelectionModel().getSelectedItem().toString());
         });
         add(fontSelLabel, 0,4);
         add(fontComboBox, 1,4);
-        
             
     }
 }

@@ -10,6 +10,7 @@ import static EPG.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
 import static EPG.StartupConstants.STYLE_SHEET_UI;
 import EPG.handler.ErrorHandler;
 import EPG.model.Component;
+import EPG.model.HeadingComponent;
 import EPG.model.ImageComponent;
 import EPG.model.ListComponent;
 import EPG.model.ParagraphComponent;
@@ -78,6 +79,12 @@ public class ComponentView extends VBox{
             getChildren().add(ssLabel);
             getChildren().add(titleLabel);
         }
+        if(comp instanceof HeadingComponent){
+            Label hLabel = new Label("Heading: ");
+            Label heading = new Label(((HeadingComponent)comp).getContent());
+            getChildren().add(hLabel);
+            getChildren().add(heading);
+        }
         editButton = new Button();
         editButton.setText("Edit");
         getChildren().add(editButton);
@@ -106,6 +113,10 @@ public class ComponentView extends VBox{
             if(comp instanceof SlideShowComponent){
                 SlideShowEditDialog a = new SlideShowEditDialog((SlideShowComponent)comp, componentEditView);
                 //a.showAndWait();
+            }
+            if(comp instanceof HeadingComponent){
+                HeadingEditDialog a = new HeadingEditDialog((HeadingComponent)comp,componentEditView);
+                a.showAndWait();
             }
         });
     }

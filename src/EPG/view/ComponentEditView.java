@@ -13,14 +13,21 @@ import static EPG.StartupConstants.CSS_CLASS_SLIDE_EDIT_VIEW;
 import static EPG.StartupConstants.STYLE_SHEET_UI;
 import EPG.model.Component;
 import EPG.model.Page;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import properties_manager.PropertiesManager;
 
@@ -36,6 +43,9 @@ public class ComponentEditView extends TabPane{
     BorderPane componentWorkspace;
     Button removeButton;
     Page page;
+    Button addComponentButton;
+    ScrollPane scrollPane =new  ScrollPane(components);
+    private Object webView;
 
     public ComponentEditView(Page page) {
         Label siteName = new Label(page.getTitle());
@@ -75,7 +85,8 @@ public class ComponentEditView extends TabPane{
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         editPage.setText(props.getProperty(EDIT_COMPONENTS));
         components = new VBox();
-        Button addComponentButton = new Button();
+        scrollPane.setContent(components);
+        addComponentButton = new Button();
         
         addComponentButton.setText("add Component");
         addComponentButton.setOnAction(e->{
@@ -94,10 +105,30 @@ public class ComponentEditView extends TabPane{
         componentToolbar.getChildren().add(removeButton);
         componentToolbar.getChildren().add(saveButton);
         componentWorkspace.setTop(componentToolbar);
-        componentWorkspace.setCenter(components);
+        componentWorkspace.setCenter(scrollPane);
         editPage.setContent(componentWorkspace);
         siteViewer = new Tab();
         webview = new WebView();
+        
+	scrollPane = new ScrollPane(webview);
+	
+	// GET THE URL
+	String indexPath = "./sites/public_html/Site 2.html";
+        System.out.println(indexPath);
+	File indexFile = new File(indexPath);
+	URL indexURL = null;
+        try {
+            indexURL = indexFile.toURI().toURL();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	
+	// SETUP THE WEB ENGINE AND LOAD THE URL
+	WebEngine webEngine = webview.getEngine();
+	webEngine.load(indexURL.toExternalForm());
+	webEngine.setJavaScriptEnabled(true);
+	
+        
         removeButton.setOnAction(e->{
             page.remove();
             reloadComponents();
@@ -115,6 +146,8 @@ public class ComponentEditView extends TabPane{
         components.getChildren().clear();
         Label siteName = new Label(page.getTitle());
         components.getChildren().add(siteName);
+        StyleEditPane stylePane = new StyleEditPane(page);
+        components.getChildren().add(stylePane);
         for(Component comp:page.getComponents()){
             ComponentView a = new ComponentView(comp,this);
             a.setOnMouseClicked(e->{

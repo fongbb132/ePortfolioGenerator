@@ -7,6 +7,7 @@ package EPG.view;
 
 import EPG.LanguagePropertyType;
 import static EPG.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
+import EPG.controller.FileSelectionController;
 import EPG.handler.ErrorHandler;
 import EPG.model.Component;
 import EPG.model.ImageComponent;
@@ -38,21 +39,27 @@ public class VideoEditDialog extends EditDialog{
     public void initView() {
         Label image = new Label("Video");
         Button selectVideo = new Button();
-        selectVideo.setText("Select Video");
+        
+        if(videoComp.getName().equals("")){
+            selectVideo.setText("Select Video");
+        }else{
+            selectVideo.setText(videoComp.getName());
+        }
+        
         selectVideo.setOnAction(e->{
-            
+           FileSelectionController a = new FileSelectionController();
+           String aa = a.processFileToString();
+           videoComp.setName(aa);
+           selectVideo.setText(aa);
         });
         
         TextField width = new TextField();
         width.setText(videoComp.getWidth()+"");
         width.setOnKeyTyped(e->{
-            videoComp.setWidth(Integer.parseInt(width.getText()));
+            
         });
         TextField height = new TextField();
         height.setText(videoComp.getHeight()+"");
-        height.setOnKeyTyped(e->{
-            videoComp.setHeight(Integer.parseInt(height.getText()));
-        });
         
         ObservableList<String> alignmentChoices = FXCollections.observableArrayList();
         alignmentChoices.add("Left");
@@ -62,12 +69,9 @@ public class VideoEditDialog extends EditDialog{
         ComboBox alignment = new ComboBox(alignmentChoices);
         Label alignmentText = new Label("Alignment");
         TextField caption = new TextField("Enter Caption");
+        caption.setText(videoComp.getCaption());
         okButton = new Button();
         okButton.setText("OK");
-        okButton.setOnAction(e->{
-           editView.reloadComponents();
-           this.hide();
-        });
         Label Caption = new Label("Caption");
         gridPane.add(image, 0, 0);
         gridPane.add(selectVideo, 1,0);
@@ -80,5 +84,14 @@ public class VideoEditDialog extends EditDialog{
         gridPane.add(width, 1, 3);
         gridPane.add(height, 1,4);
         gridPane.add(okButton, 1,5);
+        
+        okButton.setOnAction(e->{
+           videoComp.setAlignment(alignment.getSelectionModel().getSelectedItem().toString());
+           videoComp.setCaption(caption.getText());
+           videoComp.setWidth(Integer.parseInt(width.getText()));
+           videoComp.setHeight(Integer.parseInt(height.getText()));
+           editView.reloadComponents();
+           this.hide();
+        });
     }
 }

@@ -8,6 +8,7 @@ package EPG.view;
 import EPG.model.ParagraphComponent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -39,15 +40,22 @@ public class ParagraphEditDialog extends EditDialog {
 	fontChoices.add("Font 5");
         
         ComboBox fonts = new ComboBox(fontChoices);
+        Button setHyperLink = new Button();
+        setHyperLink.setText("set link");
+        setHyperLink.setOnAction(e->{
+            addLinkDialog link = new addLinkDialog(parag, this.editView);
+            link.showAndWait();
+        });
         gridPane.add(fontLabel, 0, 1);
         gridPane.add(fonts, 1, 1);
-	gridPane.add(a, 0,2);
+        gridPane.add(setHyperLink,2,1);
+	gridPane.add(a,0,2,3,1);
         okButton.setOnAction(e->{
            parag.setContent(a.getText());
            editView.reloadComponents();
            this.hide();
         });
-	gridPane.add(okButton, 0,3);
+	gridPane.add(okButton, 0,4);
     }
     
 }

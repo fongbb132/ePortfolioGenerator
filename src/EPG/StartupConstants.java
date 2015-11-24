@@ -20,6 +20,7 @@ public class StartupConstants {
     public static String PATH_DATA = "./data/";
     public static String PATH_SLIDE_SHOWS = PATH_DATA + "slide_shows/";
     public static String PATH_IMAGES = "./images/";
+    public static String PATH_SITES_WEB = "./sites/public_html/Site 2.html";
     public static String PATH_ICONS = PATH_IMAGES + "icons/";
     public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
     public static String PATH_CSS = "/EPG/style/";

@@ -1,0 +1,126 @@
+/* Initial body */
+body {
+    left: 0;
+  margin: 0;
+  position: relative;
+}
+
+.eportfolio_name{
+  padding-left: 50px;
+  font-size: 35px;
+}
+
+.page h2,.page p ,#slideshow_controls h, #slideshow_controls h2{
+  color:rgb(160,160,160) ;
+}
+.page h2,#slideshow_controls h, #slideshow_controls h2{
+  color:rgb(160,160,160) ;
+  text-align: center;
+}
+
+.page {
+  text-align:center;
+}
+/* Initial menu */
+.menu {
+  background: #202024 url('http://s3.amazonaws.com/codecademy-content/courses/ltp2/img/uber/black-thread.png') repeat left top;
+  left: 0px;  /* start off behind the scenes */
+  overflow: hidden;
+  position: absolute;
+  width: 200px;
+}
+
+/*portfolio name*/
+.post-content {
+    top:0;
+    left:0;
+    position: absolute;
+}
+
+.banner img{
+    width: 100%;
+
+}
+
+.menu{
+    bottom: 20%;
+    position:fixed;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+}
+
+.menu li {
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 3px;
+}
+
+.menu a {
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.page{
+  padding-left: 210px;
+  padding-bottom: 30px;
+}
+
+.footer {
+  position:fixed; 
+  width:100%; 
+  padding: 5px;
+  color:white;
+  bottom:0px;
+  background-color: rgb(72,72,72) ;
+}
+
+#content {
+    left:10px;
+    top:10px;
+    width:1000px;
+}
+
+#slide_caption, #slideshow_controls {
+    position:absolute;
+    left:0px;  
+    width:1000px;
+    padding-left: 10px;
+    padding-right: 10px;  
+}
+
+#slideshow_title {
+    top:0px;
+    font-size: 28pt;
+    font-weight: bold;
+}
+
+#slide_img{
+  text-align: center;
+}
+
+#slide_caption {
+    top:580px;
+    font-size:24pt;
+    text-align:center;
+}
+
+#play_pause_button{
+  padding-left: 10px;
+}
+
+#previous_button{
+  padding-left: 10px;
+
+}
+#next_button{
+  padding-left: 10px;
+
+}
+#slideshow_controls {
+    left:210px;
+    text-align:center;
+    padding-bottom: 80px;
+}
