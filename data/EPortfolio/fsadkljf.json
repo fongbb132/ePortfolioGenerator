@@ -1,0 +1,86 @@
+
+{
+    "title":"fsadkljf",
+    "pages":[
+        {
+            "page_title":"Hello",
+            "banner":"",
+            "footer":"fsdkljflaskdfjlkjqwer;lkjfsad",
+            "color":"Color 2",
+            "layout":"Layout 3",
+            "component_array":[
+                {
+                    "componet_content":"new Heading",
+                    "component_type":"h"
+                },
+                {
+                    "list_content":"",
+                    "component_type":"l",
+                    "List_component":[
+                        {
+                            "list_item":"lkdfja"
+                        },
+                        {
+                            "list_item":"lkfjdsalk"
+                        },
+                        {
+                            "list_item":"lknaslmv"
+                        }
+                    ]
+                },
+                {
+                    "componet_content":"flkdsafkjvc,mnafds",
+                    "component_type":"t",
+                    "paragraph_font":"Font 1"
+                },
+                {
+                    "componet_content":"",
+                    "component_type":"p",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/BryceCanyonUtah.jpg",
+                    "image_name":"NO NAME",
+                    "image_caption":"asd",
+                    "image_alignment":"Middle",
+                    "image_width":800,
+                    "image_height":600
+                },
+                {
+                    "componet_content":"",
+                    "component_type":"v",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/video/",
+                    "video_name":"SampleVideo_1080x720_1mb.mp4",
+                    "video_caption":"Video",
+                    "video_alignment":"Left",
+                    "video_width":800,
+                    "video_height":600
+                }
+            ]
+        },
+        {
+            "page_title":"New Page",
+            "banner":"",
+            "footer":"",
+            "color":"Color 1",
+            "layout":"Layout 1",
+            "component_array":[
+            ]
+        },
+        {
+            "page_title":"New Page",
+            "banner":"",
+            "footer":"",
+            "color":"",
+            "layout":"",
+            "component_array":[
+            ]
+        },
+        {
+            "page_title":"New Page",
+            "banner":"",
+            "footer":"",
+            "color":"",
+            "layout":"",
+            "component_array":[
+            ]
+        }
+    ]
+}

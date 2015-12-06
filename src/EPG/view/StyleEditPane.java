@@ -82,6 +82,7 @@ public class StyleEditPane extends GridPane{
         }else{
             layoutComboBox.getSelectionModel().select(page.getLayout());
         }
+        page.setLayout(layoutComboBox.getSelectionModel().getSelectedItem().toString());
         layoutSelLabel.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
         layoutComboBox.getStyleClass().add(CSS_CLASS_LANG_COMBO_BOX);
         layoutComboBox.setOnAction(e->{
@@ -106,6 +107,7 @@ public class StyleEditPane extends GridPane{
         }else{
             colorComboBox.getSelectionModel().select(page.getColor());
         }
+        page.setColor(colorComboBox.getSelectionModel().getSelectedItem().toString());
         colorComboBox.setOnAction(e->{
             page.setColor(colorComboBox.getSelectionModel().getSelectedItem().toString());
         });
@@ -129,11 +131,11 @@ public class StyleEditPane extends GridPane{
         }else{
             fontComboBox.getSelectionModel().select(page.getFont());
         }
+        page.setFont(fontComboBox.getSelectionModel().getSelectedItem().toString());
         
         fontSelLabel.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
         fontComboBox.getStyleClass().add(CSS_CLASS_LANG_COMBO_BOX);
         add(fontSelLabel, 0,4);
         add(fontComboBox, 1,4);
-            
     }
 }

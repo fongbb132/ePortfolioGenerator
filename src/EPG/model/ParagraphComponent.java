@@ -12,7 +12,7 @@ package EPG.model;
 public class ParagraphComponent extends Component {
     
     public String type = "t";
-    public String font = "default";
+    public String font = "Font 1";
 
     public ParagraphComponent(String c) {
         super(c);

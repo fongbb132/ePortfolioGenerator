@@ -10,9 +10,10 @@ package EPG.model;
  * @author Ka Wing Fong
  */
 public class HeadingComponent extends Component{
-
+    
     public HeadingComponent(String c) {
         super(c);
+        this.type = "h";
     }
     
 }

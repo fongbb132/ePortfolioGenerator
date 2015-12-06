@@ -152,7 +152,7 @@ public class FileController {
         private void promptToOpen() {
         // AND NOW ASK THE USER FOR THE COURSE TO OPEN
         FileChooser slideShowFileChooser = new FileChooser();
-        slideShowFileChooser.setInitialDirectory(new File(PATH_SLIDE_SHOWS));
+        slideShowFileChooser.setInitialDirectory(new File("./data/EPortfolio"));
         File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());
 
         // ONLY OPEN A NEW FILE IF THE USER SAYS OK
@@ -160,6 +160,7 @@ public class FileController {
             try {
 		EPortfolio portfolioToLoad = ui.getEPortfolio();
                 pageIO.loadPortfolio(portfolioToLoad, selectedFile.getAbsoluteFile());
+                System.out.println("FileController: promptoopen");
                 ui.reloadPagePane();
                 saved = true;
                 ui.updateFileToolbarControls(saved);

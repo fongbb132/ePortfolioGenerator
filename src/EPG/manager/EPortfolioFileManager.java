@@ -1,5 +1,6 @@
 package EPG.manager;
 
+import static EPG.StartupConstants.PATH_SLIDE_SHOWS;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,9 +29,11 @@ import EPG.model.Slide;
 import EPG.model.SlideShowComponent;
 import EPG.model.VideoComponent;
 import EPG.model.EPortfolio;
+import EPG.model.HeadingComponent;
 import EPG.model.ListComponent;
 import EPG.model.hyperTextComponent;
 import EPG.model.ParagraphComponent;
+import EPG.model.SlideShowModel;
 
 /**
  * This class uses the JSON standard to read and write slideshow data files.
@@ -63,7 +66,20 @@ public class EPortfolioFileManager {
     public static String JSON_LIST_CONTENT = "list_content";
     public static String JSON_LIST_ITEM = "list_item";
     public static String JSON_LIST_COMPONENT="List_component";
-
+    public static String JSON_IMAGE_CAPTION="image_caption";
+    public static String JSON_IMAGE_ALIGNMENT="image_alignment";
+    public static String JSON_IMAGE_WIDTH="image_width";
+    public static String JSON_IMAGE_HEIGHT="image_height";
+    public static String JSON_IMAGE_NAME="image_name";
+    public static String JSON_VIDEO_NAME = "video_name";
+    public static String JSON_VIDEO_CAPTION = "video_caption";
+    public static String JSON_VIDEO_ALIGNMENT = "video_alignment";
+    public static String JSON_VIDEO_WIDTH = "video_width";
+    public static String JSON_VIDEO_HEIGHT = "video_height";
+    public static String JSON_PARAGRAPH_FONT= "paragraph_font";
+            
+            
+  
     /**
      * This method saves all the data associated with a slide show to a JSON
      * file.
@@ -80,7 +96,6 @@ public class EPortfolioFileManager {
 	JsonArray pagesJsonArray = makePageJsonArray(ePortfolioToSave.getPages());
         
 	// NOW BUILD THE COURSE USING EVERYTHING WE'VE ALREADY MADE
-        System.out.println(ePortfolioToSave.getName()+"cc");
 	JsonObject ePortfolioJsonObject = Json.createObjectBuilder()
 		.add(JSON_TITLE, ePortfolioToSave.getName())
                 .add(JSON_PAGES, pagesJsonArray)
@@ -97,8 +112,7 @@ public class EPortfolioFileManager {
 	// INIT THE WRITER
 	String slideShowTitle = "" + ePortfolioToSave.getName();
         
-        //need to fix this
-	String jsonFilePath = "/Users/wing/Desktop" + SLASH + slideShowTitle + JSON_EXT;
+	String jsonFilePath = "./data/EPortfolio"+ SLASH + slideShowTitle + JSON_EXT;
 	OutputStream os = new FileOutputStream(jsonFilePath);
 	JsonWriter jsonFileWriter = Json.createWriter(os);
 	jsonFileWriter.writeObject(ePortfolioJsonObject);
@@ -109,49 +123,49 @@ public class EPortfolioFileManager {
 	System.out.println(prettyPrinted);
     }
 
-//    /**
-//     * This method loads the contents of a JSON file representing a slide show
-//     * into a SlideSShowModel objecct.
-//     *
-//     * @param portfolioToLoad The slide show to load
-//     * @param jsonFilePath The JSON file to load.
-//     * @throws IOException
-//     */
-//    public void loadSlideShow(SlideShowModel portfolioToLoad, String jsonFilePath) throws IOException {
-//	// LOAD THE JSON FILE WITH ALL THE DATA
-//	JsonObject json = loadJSONFile(jsonFilePath);
-//
-//	// NOW LOAD THE COURSE
-//	portfolioToLoad.reset();
-//	portfolioToLoad.setTitle(json.getString(JSON_TITLE));
-//	JsonArray jsonSlidesArray = json.getJsonArray(JSON_SLIDES);
-//	for (int i = 0; i < jsonSlidesArray.size(); i++) {
-//	    JsonObject slideJso = jsonSlidesArray.getJsonObject(i);
-//	    portfolioToLoad.addSlide(slideJso.getString(JSON_IMAGE_FILE_NAME),
-//		    slideJso.getString(JSON_IMAGE_PATH),
-//		    slideJso.getString(JSON_CAPTION));
-//	}
-//    }
+    /**
+     * This method loads the contents of a JSON file representing a slide show
+     * into a SlideSShowModel objecct.
+     *
+     * @param portfolioToLoad The slide show to load
+     * @param jsonFilePath The JSON file to load.
+     * @throws IOException
+     */
+    public void loadSlideShow(SlideShowModel portfolioToLoad, String jsonFilePath) throws IOException {
+	// LOAD THE JSON FILE WITH ALL THE DATA
+	JsonObject json = loadJSONFile(jsonFilePath);
 
-//    // AND HERE ARE THE PRIVATE HELPER METHODS TO HELP THE PUBLIC ONES
-//    private JsonObject loadJSONFile(String jsonFilePath) throws IOException {
-//	InputStream is = new FileInputStream(jsonFilePath);
-//	JsonReader jsonReader = Json.createReader(is);
-//	JsonObject json = jsonReader.readObject();
-//	jsonReader.close();
-//	is.close();
-//	return json;
-//    }
-//
-//    private ArrayList<String> loadArrayFromJSONFile(String jsonFilePath, String arrayName) throws IOException {
-//	JsonObject json = loadJSONFile(jsonFilePath);
-//	ArrayList<String> items = new ArrayList();
-//	JsonArray jsonArray = json.getJsonArray(arrayName);
-//	for (JsonValue jsV : jsonArray) {
-//	    items.add(jsV.toString());
-//	}
-//	return items;
-//    }
+	// NOW LOAD THE COURSE
+	portfolioToLoad.reset();
+	portfolioToLoad.setTitle(json.getString(JSON_TITLE));
+	JsonArray jsonSlidesArray = json.getJsonArray(JSON_SLIDES);
+	for (int i = 0; i < jsonSlidesArray.size(); i++) {
+	    JsonObject slideJso = jsonSlidesArray.getJsonObject(i);
+	    portfolioToLoad.addSlide(slideJso.getString(JSON_IMAGE_FILE_NAME),
+		    slideJso.getString(JSON_IMAGE_PATH),
+		    slideJso.getString(JSON_CAPTION));
+	}
+    }
+
+    // AND HERE ARE THE PRIVATE HELPER METHODS TO HELP THE PUBLIC ONES
+    private JsonObject loadJSONFile(String jsonFilePath) throws IOException {
+	InputStream is = new FileInputStream(jsonFilePath);
+	JsonReader jsonReader = Json.createReader(is);
+	JsonObject json = jsonReader.readObject();
+	jsonReader.close();
+	is.close();
+	return json;
+    }
+
+    private ArrayList<String> loadArrayFromJSONFile(String jsonFilePath, String arrayName) throws IOException {
+	JsonObject json = loadJSONFile(jsonFilePath);
+	ArrayList<String> items = new ArrayList();
+	JsonArray jsonArray = json.getJsonArray(arrayName);
+	for (JsonValue jsV : jsonArray) {
+	    items.add(jsV.toString());
+	}
+	return items;
+    }
 
     private JsonArray makeComponentJsonArray(List<Component> components) {
 	JsonArrayBuilder jsb = Json.createArrayBuilder();
@@ -224,6 +238,7 @@ public class EPortfolioFileManager {
         return jso;
     }
     
+
     private JsonObject makeComponentJsonObject(Component component){
         JsonObject jso;
         if(component instanceof ImageComponent){
@@ -231,6 +246,11 @@ public class EPortfolioFileManager {
                     .add(JSON_COMPONENT_CONTENT, ((ImageComponent)component).getContent())
                     .add(JSON_COMPONENT_TYPE,((ImageComponent)component).getType())
                     .add(JSON_COMPONENT_SRC, ((ImageComponent)component).getSrc())
+                    .add(JSON_IMAGE_NAME, ((ImageComponent)component).getName())
+                    .add(JSON_IMAGE_CAPTION, ((ImageComponent)component).getCaption())
+                    .add(JSON_IMAGE_ALIGNMENT, ((ImageComponent)component).getAlignment())
+                    .add(JSON_IMAGE_WIDTH, ((ImageComponent)component).getWidth())
+                    .add(JSON_IMAGE_HEIGHT, ((ImageComponent)component).getHeight())
                     .build();
         }else if(component instanceof ListComponent){
             jso = Json.createObjectBuilder()
@@ -245,6 +265,11 @@ public class EPortfolioFileManager {
                     .add(JSON_COMPONENT_CONTENT, ((VideoComponent)component).getContent())
                     .add(JSON_COMPONENT_TYPE,((VideoComponent)component).getType())
                     .add(JSON_COMPONENT_SRC, ((VideoComponent)component).getSrc())
+                    .add(JSON_VIDEO_NAME, ((VideoComponent)component).getName())
+                    .add(JSON_VIDEO_CAPTION, ((VideoComponent)component).getCaption())
+                    .add(JSON_VIDEO_ALIGNMENT, ((VideoComponent)component).getAlignment())
+                    .add(JSON_VIDEO_WIDTH, ((VideoComponent)component).getWidth())
+                    .add(JSON_VIDEO_HEIGHT, ((VideoComponent)component).getHeight())
                     .build();
         }
         else if(component instanceof hyperTextComponent){
@@ -258,6 +283,7 @@ public class EPortfolioFileManager {
             jso = Json.createObjectBuilder()
                     .add(JSON_COMPONENT_CONTENT, ((ParagraphComponent)component).getContent())
                     .add(JSON_COMPONENT_TYPE,((ParagraphComponent)component).getType())
+                    .add(JSON_PARAGRAPH_FONT,((ParagraphComponent)component).getFont())
                     .build();
         }
         else if(component instanceof SlideShowComponent){
@@ -270,13 +296,14 @@ public class EPortfolioFileManager {
         else{
             jso = Json.createObjectBuilder()
                     .add(JSON_COMPONENT_CONTENT, (component).getContent())
+                    .add(JSON_COMPONENT_TYPE, (component).getType())
                     .build();
         }
         return jso;
     }
 
     public void saveSlideShow(EPortfolio slideShow) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     
@@ -285,10 +312,63 @@ public class EPortfolioFileManager {
 
 	// NOW LOAD THE COURSE
 	portfolioToLoad.reset();
-//	portfolioToLoad.setName(json.getString(JSON_TITLE));
-	JsonArray jsonSlidesArray = json.getJsonArray(JSON_SLIDES);
-	for (int i = 0; i < jsonSlidesArray.size(); i++) {
-	    JsonObject slideJso = jsonSlidesArray.getJsonObject(i);
+	portfolioToLoad.setName(json.getString(JSON_TITLE));
+	JsonArray jsonPagesArray = json.getJsonArray(JSON_PAGES);
+	for (int i = 0; i < jsonPagesArray.size(); i++) {
+	    JsonObject pageJso = jsonPagesArray.getJsonObject(i);
+            Page temp = new Page(pageJso.getString(JSON_PAGE_TITLE));
+            temp.setColor(pageJso.getString(JSON_COLOR));
+            temp.setLayout(pageJso.getString(JSON_LAYOUT));
+            temp.setBanner(pageJso.getString(JSON_BANNER));
+            temp.setFooter(pageJso.getString(JSON_FOOTER));
+            JsonArray componentArray = pageJso.getJsonArray(JSON_COMPONENT_ARRAY);
+            for(int a = 0; a< componentArray.size();a++){
+                JsonObject componentJso = componentArray.getJsonObject(a);
+                if(componentJso.getString(JSON_COMPONENT_TYPE).equals("h")){
+                    HeadingComponent h = new HeadingComponent(componentJso.getString(JSON_COMPONENT_CONTENT));
+                    temp.addComponent(h);
+                }
+                else if(componentJso.getString(JSON_COMPONENT_TYPE).equals("l")){
+                    ListComponent l = new ListComponent("");
+                    JsonArray listArray = componentJso.getJsonArray(JSON_LIST_COMPONENT);
+                    for(int b = 0; b<listArray.size();b++){
+                        JsonObject listJso = listArray.getJsonObject(b);
+                        l.addList(listJso.getString(JSON_LIST_ITEM));
+                    }
+                    temp.addComponent(l);
+                }
+                else if(componentJso.getString(JSON_COMPONENT_TYPE).equals("p")){
+                    ImageComponent image = new ImageComponent("");
+                    image.setAlignment(componentJso.getString(JSON_IMAGE_ALIGNMENT));
+                    image.setCaption(componentJso.getString(JSON_IMAGE_CAPTION));
+                    int height = componentJso.getInt(JSON_IMAGE_HEIGHT);
+                    int width = componentJso.getInt(JSON_IMAGE_WIDTH);
+                    System.out.println(height + " "+ width);
+                    image.setHeight(height);
+                    image.setWidth(width);
+                    image.setSrc(componentJso.getString(JSON_COMPONENT_SRC));
+                    temp.addComponent(image);
+                }
+                else if(componentJso.getString(JSON_COMPONENT_TYPE).equals("v")){
+                    VideoComponent video = new VideoComponent("");
+                    video.setAlignment(componentJso.getString(JSON_VIDEO_ALIGNMENT));
+                    video.setCaption(componentJso.getString(JSON_VIDEO_CAPTION));
+                    video.setHeight(componentJso.getInt(JSON_VIDEO_HEIGHT));
+                    video.setWidth(componentJso.getInt(JSON_VIDEO_WIDTH));
+                    video.setSrc(componentJso.getString(JSON_COMPONENT_SRC));
+                    video.setName(componentJso.getString(JSON_VIDEO_NAME));
+                    temp.addComponent(video);
+                }
+                else if(componentJso.getString(JSON_COMPONENT_TYPE).equals("t")){
+                    ParagraphComponent p = new ParagraphComponent("");
+                    String font = componentJso.getString("paragraph_font");
+                    System.out.println(font);
+                    p.setFont(componentJso.getString("paragraph_font"));
+                    p.setContent(componentJso.getString(JSON_COMPONENT_CONTENT));
+                    temp.addComponent(p);
+                }
+            }
+            portfolioToLoad.addPages(temp);
 	}
     }
 

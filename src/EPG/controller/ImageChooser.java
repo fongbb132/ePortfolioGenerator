@@ -35,7 +35,8 @@ public class ImageChooser {
 	FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 	FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
 	FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.GIF");
-	imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
+	FileChooser.ExtensionFilter mp4Filter = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.mp4");
+	imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter,mp4Filter);
 	
 	// LET'S OPEN THE FILE CHOOSER
 	File file = imageFileChooser.showOpenDialog(null);

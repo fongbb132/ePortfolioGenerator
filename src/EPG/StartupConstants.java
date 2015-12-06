@@ -25,6 +25,7 @@ public class StartupConstants {
     public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
     public static String PATH_CSS = "/EPG/style/";
     public static String STYLE_SHEET_UI = PATH_CSS + "StyleSheet.css";
+    public static String EPORTFOLIO_PATH = "./data/EPortfolio";
 
     // HERE ARE THE LANGUAGE INDEPENDENT GUI ICONS
     public static String ICON_WINDOW_LOGO = "SSM_Logo.png";

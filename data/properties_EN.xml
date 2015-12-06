@@ -11,6 +11,7 @@
         <!-- PROGRAM ICON FILES -->
 	
         <!-- TOOLTIPS FOR BUTTONS -->
+        <property name="ERROR_UNEXPECTED"           value= "Unexpected Error"></property>
         <property name="TOOLTIP_NEW_SLIDE_SHOW"	    value="Create a New Slide Show"></property>
         <property name="TOOLTIP_LOAD_SLIDE_SHOW"    value="Load an Existing Slide Show"></property>
         <property name="TOOLTIP_SAVE_SLIDE_SHOW"    value="Save this Slide Show"></property>
