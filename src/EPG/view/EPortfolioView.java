@@ -46,6 +46,7 @@ import EPG.handler.ErrorHandler;
 import EPG.manager.EPortfolioFileManager;
 import EPG.model.EPortfolio;
 import EPG.model.Page;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,10 +111,13 @@ public class EPortfolioView {
 
     private FileController fileController;
     private PortfolioController editController;
+    
     public EPortfolioView(EPortfolioFileManager fileManager) {
         this.fileManager = fileManager;
         ePortfolio = new EPortfolio("Untitled ePortfolio",this);
         errorHandler = new ErrorHandler();
+	studentTextField = new TextField();
+        studentTextField.setText(ePortfolio.getName());
     }
 
     public ErrorHandler getErrorHandler() {
@@ -197,9 +201,32 @@ public class EPortfolioView {
     private void initEventHandlers() {
         fileController = new FileController(this, fileManager);
         newPortfolioButton.setOnAction(e->{
-            fileController.handleNewSlideShowRequest();
+            fileController.handleNewPortfolioRequest();
+        });
+        loadPortfolioButton.setOnAction(e->{
+            fileController.handleLoadEportfolioRequest();
+        });
+        savePortfolioButton.setOnAction(e->{
+            fileController.handleSaveEPortfolioRequest();
+        });
+        
+        saveAsButton.setOnAction(e->{
+            fileController.handleSaveEPortfolioRequest();
+        });
+        
+        exitButton.setOnAction(e->{
+            fileController.handleExitRequest();
         });
         viewPortfolioButton.setOnAction(e->{
+            EPortfolioFileManager fileManager = new EPortfolioFileManager();
+            try {
+                fileManager.saveEPortfolio(ePortfolio);
+                System.out.println("SLIDE SHOW SAVED");
+            }
+            catch(IOException ioe) {
+                ioe.printStackTrace();
+                System.exit(-1);
+            }
             SiteViewer siteView = new SiteViewer(this);
             try {
                 siteView.startSiteView();
@@ -213,7 +240,9 @@ public class EPortfolioView {
         });
         removeButton.setOnAction(e->{
             editController.processRemovePageRequest();
+            this.clearEditPageView();
         });
+        
     }
     
     public void reloadPagePane(){
@@ -259,21 +288,16 @@ public class EPortfolioView {
 	String labelPrompt = props.getProperty(LABEL_STUDENT_NAME);
 	studentPane = new FlowPane();
 	studentLabel = new Label(labelPrompt);
-	studentTextField = new TextField();
-                
 	HBox hBox = new HBox();
         
         hBox.getChildren().add(studentLabel);
         hBox.getChildren().add(studentTextField);
 	studentPane.getChildren().add(hBox);
         
-	String studentPrompt = props.getProperty(LanguagePropertyType.LABEL_STUDENT_NAME);
-	studentTextField.setText(studentPrompt);
-	
-	studentTextField.textProperty().addListener(e -> {
-	    ePortfolio.setName(studentTextField.getText());
-	    updateFileToolbarControls(false);
-	});
+        studentTextField.setOnKeyReleased(e->{
+            ePortfolio.setName(studentTextField.getText());
+            updateFileToolbarControls(false);
+        });
 	
 	studentPane.getStyleClass().add(CSS_CLASS_TITLE_PANE);
 	studentLabel.getStyleClass().add(CSS_CLASS_TITLE_PROMPT);
@@ -319,5 +343,9 @@ public class EPortfolioView {
         newEdit.getStylesheets().add(STYLE_SHEET_UI);
         newEdit.reloadComponents();
         componentEditVBox.getChildren().add(newEdit);
+    }
+
+    public void clearEditPageView() {
+        componentEditVBox.getChildren().clear();
     }
 }

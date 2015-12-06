@@ -16,36 +16,16 @@ import properties_manager.PropertiesManager;
  */
 public class EPortfolio {
     private ArrayList<Page> pages = new ArrayList<Page>();
-    private String name = "";
-    private String banner = "";
-    private String footer = "";
-    private String color = "";
-    private String layout = "";
     private Page selectedPage;
     private EPortfolioView ui;
-    private String header = "";
-    private String font="";
+    private String name;
 
-    public String getFont() {
-        return font;
-    }
-
-    public void setFont(String font) {
-        this.font = font;
-    }
+    
     public EPortfolio(String ePortName,EPortfolioView a){
         name = ePortName;
         ui = a;
-        
     }
 
-    public String getHeader() {
-        return header;
-    }
-
-    public void setHeader(String header) {
-        this.header = header;
-    }
 
     public ArrayList<Page> getPages() {
         return pages;
@@ -56,43 +36,13 @@ public class EPortfolio {
     }
     
     public void setName(String name){
-        this.name = name;
+        if(name!=null){
+            this.name = name;
+        }
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getBanner() {
-        return banner;
-    }
-
-    public void setBanner(String banner) {
-        this.banner = banner;
-    }
-
-    public String getFooter() {
-        return footer;
-    }
-
-    public void setFooter(String footer) {
-        this.footer = footer;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getLayout() {
-        return layout;
-    }
-
-    public void setLayout(String layout) {
-        this.layout = layout;
     }
 
     public boolean isPageSelected() {
@@ -106,7 +56,7 @@ public class EPortfolio {
     public void reset() {
         pages.clear();
         PropertiesManager props = PropertiesManager.getPropertiesManager();
-        name = props.getProperty(LanguagePropertyType.DEFAULT_SLIDE_SHOW_TITLE);
+        name = "untitle ePortfolio";
         selectedPage = null;
     }
 

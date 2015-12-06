@@ -28,6 +28,7 @@ import EPG.model.Slide;
 import EPG.model.SlideShowComponent;
 import EPG.model.VideoComponent;
 import EPG.model.EPortfolio;
+import EPG.model.ListComponent;
 import EPG.model.hyperTextComponent;
 import EPG.model.ParagraphComponent;
 
@@ -59,6 +60,9 @@ public class EPortfolioFileManager {
     public static String JSON_SLIDESHOW = "slideshow";
     public static String JSON_PAGE_TITLE = "page_title";
     public static String JSON_COMPONENT_ARRAY= "component_array";
+    public static String JSON_LIST_CONTENT = "list_content";
+    public static String JSON_LIST_ITEM = "list_item";
+    public static String JSON_LIST_COMPONENT="List_component";
 
     /**
      * This method saves all the data associated with a slide show to a JSON
@@ -74,14 +78,11 @@ public class EPortfolioFileManager {
 
 	// BUILD THE SLIDES ARRAY
 	JsonArray pagesJsonArray = makePageJsonArray(ePortfolioToSave.getPages());
-
+        
 	// NOW BUILD THE COURSE USING EVERYTHING WE'VE ALREADY MADE
+        System.out.println(ePortfolioToSave.getName()+"cc");
 	JsonObject ePortfolioJsonObject = Json.createObjectBuilder()
 		.add(JSON_TITLE, ePortfolioToSave.getName())
-		.add(JSON_BANNER, ePortfolioToSave.getBanner())
-                .add(JSON_FOOTER, ePortfolioToSave.getFooter())
-                .add(JSON_COLOR, ePortfolioToSave.getColor())
-                .add(JSON_LAYOUT, ePortfolioToSave.getLayout())
                 .add(JSON_PAGES, pagesJsonArray)
 		.build();
 
@@ -112,21 +113,21 @@ public class EPortfolioFileManager {
 //     * This method loads the contents of a JSON file representing a slide show
 //     * into a SlideSShowModel objecct.
 //     *
-//     * @param slideShowToLoad The slide show to load
+//     * @param portfolioToLoad The slide show to load
 //     * @param jsonFilePath The JSON file to load.
 //     * @throws IOException
 //     */
-//    public void loadSlideShow(SlideShowModel slideShowToLoad, String jsonFilePath) throws IOException {
+//    public void loadSlideShow(SlideShowModel portfolioToLoad, String jsonFilePath) throws IOException {
 //	// LOAD THE JSON FILE WITH ALL THE DATA
 //	JsonObject json = loadJSONFile(jsonFilePath);
 //
 //	// NOW LOAD THE COURSE
-//	slideShowToLoad.reset();
-//	slideShowToLoad.setTitle(json.getString(JSON_TITLE));
+//	portfolioToLoad.reset();
+//	portfolioToLoad.setTitle(json.getString(JSON_TITLE));
 //	JsonArray jsonSlidesArray = json.getJsonArray(JSON_SLIDES);
 //	for (int i = 0; i < jsonSlidesArray.size(); i++) {
 //	    JsonObject slideJso = jsonSlidesArray.getJsonObject(i);
-//	    slideShowToLoad.addSlide(slideJso.getString(JSON_IMAGE_FILE_NAME),
+//	    portfolioToLoad.addSlide(slideJso.getString(JSON_IMAGE_FILE_NAME),
 //		    slideJso.getString(JSON_IMAGE_PATH),
 //		    slideJso.getString(JSON_CAPTION));
 //	}
@@ -176,6 +177,10 @@ public class EPortfolioFileManager {
         JsonArray jA = makeComponentJsonArray(page.getComponents());
         JsonObject jso = Json.createObjectBuilder()
                 .add(JSON_PAGE_TITLE, page.getTitle())
+		.add(JSON_BANNER, page.getBanner())
+                .add(JSON_FOOTER, page.getFooter())
+                .add(JSON_COLOR, page.getColor())
+                .add(JSON_LAYOUT, page.getLayout())
                 .add(JSON_COMPONENT_ARRAY, jA)
                 .build();
         return jso;
@@ -183,10 +188,20 @@ public class EPortfolioFileManager {
     }
     
     
-    private JsonArray makeSlidesJsonArray(ArrayList<Slide> slides) {
+    private JsonArray makeSlidesJsonArray(List<Slide> slides) {
 	JsonArrayBuilder jsb = Json.createArrayBuilder();
-	for (Slide slide : slides) {
+	for (Slide slide: slides) {
 	    JsonObject jso = makeSlideJsonObject(slide);
+	    jsb.add(jso);
+	}
+	JsonArray jA = jsb.build();
+	return jA;
+    }
+    
+    private JsonArray makeListArray(List<String> list){
+	JsonArrayBuilder jsb = Json.createArrayBuilder();
+	for (String a:list) {
+	    JsonObject jso = makeListJsonObject(a);
 	    jsb.add(jso);
 	}
 	JsonArray jA = jsb.build();
@@ -202,6 +217,13 @@ public class EPortfolioFileManager {
 	return jso;
     }
     
+    private JsonObject makeListJsonObject(String a) {
+        JsonObject jso = Json.createObjectBuilder()
+                .add(JSON_LIST_ITEM, a)
+                .build();
+        return jso;
+    }
+    
     private JsonObject makeComponentJsonObject(Component component){
         JsonObject jso;
         if(component instanceof ImageComponent){
@@ -210,6 +232,13 @@ public class EPortfolioFileManager {
                     .add(JSON_COMPONENT_TYPE,((ImageComponent)component).getType())
                     .add(JSON_COMPONENT_SRC, ((ImageComponent)component).getSrc())
                     .build();
+        }else if(component instanceof ListComponent){
+            jso = Json.createObjectBuilder()
+                    .add(JSON_LIST_CONTENT,((ListComponent)component).getContent())
+                    .add(JSON_COMPONENT_TYPE, ((ListComponent)component).getType())
+                    .add(JSON_LIST_COMPONENT,this.makeListArray(((ListComponent)component).getList()))
+                    .build();
+                    
         }
         else if(component instanceof VideoComponent){
             jso = Json.createObjectBuilder()
@@ -235,7 +264,7 @@ public class EPortfolioFileManager {
             jso = Json.createObjectBuilder()
                     .add(JSON_COMPONENT_CONTENT, ((SlideShowComponent)component).getTitle())
                     .add(JSON_COMPONENT_TYPE,((SlideShowComponent)component).getType())
-//                    .add(JSON_SLIDESHOW, this.makeSlidesJsonArray(((SlideShowComponent)component).getSlides()))
+                    .add(JSON_SLIDESHOW, this.makeSlidesJsonArray(((SlideShowComponent)component).getSlides()))
                     .build();
         }
         else{
@@ -243,11 +272,33 @@ public class EPortfolioFileManager {
                     .add(JSON_COMPONENT_CONTENT, (component).getContent())
                     .build();
         }
-        
         return jso;
     }
 
     public void saveSlideShow(EPortfolio slideShow) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
+    public void loadPortfolio(EPortfolio portfolioToLoad, File absoluteFile) throws IOException {
+        JsonObject json = loadJSONFile(absoluteFile);
+
+	// NOW LOAD THE COURSE
+	portfolioToLoad.reset();
+//	portfolioToLoad.setName(json.getString(JSON_TITLE));
+	JsonArray jsonSlidesArray = json.getJsonArray(JSON_SLIDES);
+	for (int i = 0; i < jsonSlidesArray.size(); i++) {
+	    JsonObject slideJso = jsonSlidesArray.getJsonObject(i);
+	}
+    }
+
+    private JsonObject loadJSONFile(File absoluteFile) throws IOException{
+       	InputStream is = new FileInputStream(absoluteFile);
+	JsonReader jsonReader = Json.createReader(is);
+	JsonObject json = jsonReader.readObject();
+	jsonReader.close();
+	is.close();
+	return json;
+    }
+
 }

@@ -85,6 +85,7 @@ public class ComponentView extends VBox{
             getChildren().add(hLabel);
             getChildren().add(heading);
         }
+        
         editButton = new Button();
         editButton.setText("Edit");
         editButton.getStyleClass().add("-fx-padding: 10 0 10 0");

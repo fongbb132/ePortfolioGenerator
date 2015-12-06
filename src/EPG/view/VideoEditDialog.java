@@ -8,6 +8,7 @@ package EPG.view;
 import EPG.LanguagePropertyType;
 import static EPG.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
 import EPG.controller.FileSelectionController;
+import EPG.controller.ImageChooser;
 import EPG.handler.ErrorHandler;
 import EPG.model.Component;
 import EPG.model.ImageComponent;
@@ -47,10 +48,13 @@ public class VideoEditDialog extends EditDialog{
         }
         
         selectVideo.setOnAction(e->{
-           FileSelectionController a = new FileSelectionController();
-           String aa = a.processFileToString();
-           videoComp.setName(aa);
-           selectVideo.setText(aa);
+            ImageChooser temp = new ImageChooser();
+            String[] a = temp.processSelectImage();
+            if(a[0]!=null){
+                videoComp.setSrc(a[0]);
+                videoComp.setName(a[1]);
+                selectVideo.setText(a[1]);
+            }
         });
         
         TextField width = new TextField();
@@ -65,8 +69,8 @@ public class VideoEditDialog extends EditDialog{
         alignmentChoices.add("Left");
         alignmentChoices.add("Middle");
         alignmentChoices.add("Right");
-        
         ComboBox alignment = new ComboBox(alignmentChoices);
+        alignment.getSelectionModel().select(alignmentChoices.get(0));
         Label alignmentText = new Label("Alignment");
         TextField caption = new TextField("Enter Caption");
         caption.setText(videoComp.getCaption());

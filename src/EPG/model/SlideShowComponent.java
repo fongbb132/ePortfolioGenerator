@@ -7,6 +7,7 @@ package EPG.model;
 
 import EPG.view.SlideShowEditDialog;
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -20,10 +21,16 @@ public class SlideShowComponent extends Component{
         super(n);
         slideshowModel = new SlideShowModel(a);
     }
+    
 
     public String getType(){
         return type;
     }
+    
+    public void setSlideShowEditDialog(SlideShowEditDialog a){
+        slideshowModel.setSlideShowEditDialog(a);
+    }
+    
     public SlideShowModel getSlideShowModel() {
         return slideshowModel;
     }
@@ -42,5 +49,7 @@ public class SlideShowComponent extends Component{
         slideshowModel.setTitle(title);
     }
     
-    
+    public ObservableList<Slide> getSlides(){
+        return slideshowModel.getSlides();
+    }
 }

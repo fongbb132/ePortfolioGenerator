@@ -6,22 +6,15 @@
 package EPG.controller;
 
 import static EPG.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
-import EPG.model.Slide;
-import EPG.view.SlideEditView;
-import EPG.view.SlideShowEditDialog;
+import EPG.view.EPortfolioView;
 import java.io.File;
 import javafx.stage.FileChooser;
 
 /**
  *
- * @author wing
+ * @author Ka Wing Fong
  */
-public class ImageSelectionController {
-SlideShowEditDialog ui;
-    
-    public ImageSelectionController(SlideShowEditDialog initUi) {   
-	ui = initUi;
-    }
+public class ImageChooser {
     
     /**
      * This function provides the response to the user's request to
@@ -32,9 +25,9 @@ SlideShowEditDialog ui;
      * @param view The user interface control group where the image
      * will appear after selection.
      */
-    public void processSelectImage(Slide slideToEdit, SlideEditView view) {
+    public String[] processSelectImage() {
 	FileChooser imageFileChooser = new FileChooser();
-	
+	String[] imageInfo = new String[2];
 	// SET THE STARTING DIRECTORY
 	imageFileChooser.setInitialDirectory(new File(PATH_SLIDE_SHOW_IMAGES));
 	
@@ -49,9 +42,9 @@ SlideShowEditDialog ui;
 	if (file != null) {
 	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
 	    String fileName = file.getName();
-	    slideToEdit.setImage(path, fileName);
-	    view.updateSlideImage();
-	    ui.updateFileToolbarControls(false);
+            imageInfo[0] = path;
+            imageInfo[1] = fileName;
 	}
-    }  
+        return imageInfo;
+    }
 }

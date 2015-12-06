@@ -21,7 +21,8 @@ public class SlideShowModel {
     public SlideShowModel(SlideShowEditDialog initUI) {
 	ui = initUI;
 	slides = FXCollections.observableArrayList();
-	reset();	
+	reset();
+        title="";
     }
 
     // ACCESSOR METHODS
@@ -165,4 +166,8 @@ public class SlideShowModel {
 	    selectedSlide = slides.get(index);
 	}
     }    
+
+    void setSlideShowEditDialog(SlideShowEditDialog a) {
+        ui = a;
+    }
 }

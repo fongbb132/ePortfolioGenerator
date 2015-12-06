@@ -11,7 +11,7 @@ package EPG.model;
  */
 public class VideoComponent extends Component{
     
-    private String src;
+    private String src="";
     private String type = "v";
     private String name;
     private String caption;

@@ -33,7 +33,6 @@ public class SiteViewer extends Stage{
         this.ePortfolioView = ePortfolioView;
     }
    
-    
     public void startSiteView() throws MalformedURLException {
 	// SETUP THE UI
 	webView = new WebView();
@@ -41,7 +40,6 @@ public class SiteViewer extends Stage{
 	
 	// GET THE URL
 	String indexPath = "./sites/public_html/Site 2.html";
-        System.out.println(indexPath);
 	File indexFile = new File(indexPath);
 	URL indexURL = indexFile.toURI().toURL();
 	

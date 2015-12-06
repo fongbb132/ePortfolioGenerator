@@ -17,30 +17,23 @@ public class JsonTester {
     public static void main(String[] args) {
 	eportfolio = new EPortfolio(TEST_TITLE,null);
         
-	// ADD THREE SLIDES
-        
         VideoComponent vCom = new VideoComponent("http://clips.vorwaerts-gmbh.de/VfE_html5.mp4","video");
         ImageComponent pCom = new ImageComponent("http://www3.cs.stonybrook.edu/~richard/images/personal_pics/MeAndTheKid.jpg","video");
         ParagraphComponent tCom = new ParagraphComponent("The weather today is very nice. It's not a good day to do programming");
         hyperTextComponent hCom = new hyperTextComponent("There is the link showing you the weather today.", "http://www.weather.com/");
         //SlideShowComponent sCom = new SlideShowComponent("slideShow");
         
-//	sCom.addSlide("BryceCanyonUtah.jpg","BryceCanyonUtah.jpg","hello");
-//	sCom.addSlide("CapeSpearNewfoundland.jpg","CapeSpearNewfoundland.jpg","hi");
-//	sCom.addSlide("OregonTrailNebraska.jpg","OregonTrailNebraska.jpg","thank you");
 	Page page = new Page("Site 1");
         page.addComponent(vCom);
         page.addComponent(pCom);
         page.addComponent(tCom);
         page.addComponent(hCom);
-//        page.addComponent(sCom);
         
         Page page1 = new Page("Site 2");
         page1.addComponent(vCom);
         page1.addComponent(pCom);
         page1.addComponent(tCom);
         page1.addComponent(hCom);
-//        page1.addComponent(sCom);
 	
         Page page2 = new Page("Site 3");
         page2.addComponent(vCom);
@@ -70,10 +63,6 @@ public class JsonTester {
         eportfolio.addPages(page2);
         eportfolio.addPages(page3);
         eportfolio.addPages(page4);
-        eportfolio.setBanner("http://www.thegamingvault.com/uploads/2011/02/pokemon-pikachu-banner.jpg");
-        eportfolio.setColor("black");
-        eportfolio.setFooter("Make by Ka Wing Fong @2015");
-        eportfolio.setLayout("template 1");
         EPortfolioFileManager fileManager = new EPortfolioFileManager();
 	try {
 	    fileManager.saveEPortfolio(eportfolio);
@@ -83,7 +72,7 @@ public class JsonTester {
 	    ioe.printStackTrace();
 	    System.exit(-1);
 	}
-//
+        
 //	SlideShowModel newSlideShow = new SlideShowModel(null);
 //	try {
 //	    fileManager.loadSlideShow(slideShow, PATH_SLIDE_SHOWS + SLASH + TEST_TITLE + JSON_EXT);

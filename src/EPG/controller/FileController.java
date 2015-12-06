@@ -7,12 +7,15 @@ package EPG.controller;
 
 import EPG.LanguagePropertyType;
 import static EPG.LanguagePropertyType.LABEL_SAVE_UNSAVED_WORK;
+import static EPG.StartupConstants.PATH_SLIDE_SHOWS;
 import EPG.handler.ErrorHandler;
 import EPG.manager.EPortfolioFileManager;
 import EPG.model.EPortfolio;
 import EPG.view.EPortfolioView;
 import EPG.view.YesNoCancelDialog;
+import java.io.File;
 import java.io.IOException;
+import javafx.stage.FileChooser;
 import properties_manager.PropertiesManager;
 
 /**
@@ -35,12 +38,11 @@ public class FileController {
         ui.updateFileToolbarControls(saved);
     }
     
-    public void handleNewSlideShowRequest(){
+    public void handleNewPortfolioRequest(){
         try{
             boolean continueToMakeNew = true;
             if(!saved){
                 continueToMakeNew = promptToSave();
-                
             }
             if(continueToMakeNew){
                 EPortfolio ePortfolio = ui.getEPortfolio();
@@ -49,6 +51,7 @@ public class FileController {
                 ui.updateFileToolbarControls(saved);
                 ui.reloadTitleControls();
                 ui.reloadPagePane();
+                ui.clearEditPageView();
             }
         }catch(IOException ioe){
             ErrorHandler eh = ui.getErrorHandler();
@@ -84,20 +87,88 @@ public class FileController {
         return true;
     }
 
-    public void handleLoadSlideShowRequest() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void handleLoadEportfolioRequest() {
+        try {
+            // WE MAY HAVE TO SAVE CURRENT WORK
+            boolean continueToOpen = true;
+            if (!saved) {
+                // THE USER CAN OPT OUT HERE WITH A CANCEL
+                continueToOpen = promptToSave();
+            }
+
+            // IF THE USER REALLY WANTS TO OPEN A POSE
+            if (continueToOpen) {
+                // GO AHEAD AND PROCEED MAKING A NEW POSE
+                promptToOpen();
+            }
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_DATA_FILE_LOADING);
+        }
     }
 
-    public void handleSaveSlideShowRequest() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public boolean handleSaveEPortfolioRequest() {
+        try {
+	    // GET THE SLIDE SHOW TO SAVE
+	    EPortfolio toSave = ui.getEPortfolio();
+	    
+            // SAVE IT TO A FILE
+            pageIO.saveEPortfolio(toSave);
 
-    public void handleViewSlideShowRequest() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            // MARK IT AS SAVED
+            saved = true;
+
+            // AND REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE
+            // THE APPROPRIATE CONTROLS
+            ui.updateFileToolbarControls(saved);
+	    return true;
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+	    return false;
+        }
     }
 
     public void handleExitRequest() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            // WE MAY HAVE TO SAVE CURRENT WORK
+            boolean continueToExit = true;
+            if (!saved) {
+                // THE USER CAN OPT OUT HERE
+                continueToExit = promptToSave();
+            }
+
+            // IF THE USER REALLY WANTS TO EXIT THE APP
+            if (continueToExit) {
+                // EXIT THE APPLICATION
+                System.exit(0);
+            }
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+        }
+    }
+    
+        private void promptToOpen() {
+        // AND NOW ASK THE USER FOR THE COURSE TO OPEN
+        FileChooser slideShowFileChooser = new FileChooser();
+        slideShowFileChooser.setInitialDirectory(new File(PATH_SLIDE_SHOWS));
+        File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());
+
+        // ONLY OPEN A NEW FILE IF THE USER SAYS OK
+        if (selectedFile != null) {
+            try {
+		EPortfolio portfolioToLoad = ui.getEPortfolio();
+                pageIO.loadPortfolio(portfolioToLoad, selectedFile.getAbsoluteFile());
+                ui.reloadPagePane();
+                saved = true;
+                ui.updateFileToolbarControls(saved);
+                ui.clearEditPageView();
+            } catch (Exception e) {
+                ErrorHandler eH = ui.getErrorHandler();
+		eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+            }
+        }
     }
     
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ListComponent extends Component{
     ArrayList<String> list;
     String type = "l";
+    int selected = -1;
     public ListComponent(String a) {
         super(a);
         list = new ArrayList<String>();
@@ -23,18 +24,49 @@ public class ListComponent extends Component{
         return list;
     }
     
+    public String getType(){
+        return type;
+    }
     public void addList(String newItem){
         list.add(newItem);
     }
-    
-    public void removeList(String a){
-        list.remove(a);
+
+    public void setSelected(int a){
+        selected = a;
     }
 
-
+    public void removeSelectedItem(){
+        list.remove(selected);
+        selected = -1;
+    }
     public void removeList(String b, String text) {
         int index = list.indexOf(b);
         list.remove(index);
         list.add(index, text);
     }
+    public void editItem(int pos, String text){
+        list.remove(pos);
+        list.add(pos, text);
+    }
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public void moveUp() {
+        if(selected>0){
+            String temp = list.remove(selected);
+            selected = selected-1;
+            list.add(selected,temp);
+        }
+    }
+
+    public void moveDown() {
+        if(selected<list.size()-1){
+            String temp = list.remove(selected);
+            selected+=1;
+            list.add(selected,temp);
+        }
+    }
+
 }

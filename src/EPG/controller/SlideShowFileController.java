@@ -69,8 +69,8 @@ public class SlideShowFileController {
             // IF THE USER REALLY WANTS TO MAKE A NEW COURSE
             if (continueToMakeNew) {
                 // RESET THE DATA, WHICH SHOULD TRIGGER A RESET OF THE UI
-                SlideShowModel slideShow = ui.getSlideShow();
-		slideShow.reset();
+                //SlideShowModel slideShow = ui.getSlideShow();
+		//slideShow.reset();
                 saved = false;
 
                 // REFRESH THE GUI, WHICH WILL ENABLE AND DISABLE

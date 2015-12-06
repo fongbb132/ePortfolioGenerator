@@ -89,7 +89,7 @@ public class ChooseComponentDialog extends Stage{
 	okButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
 	
 	// NOW SET THE SCENE IN THIS WINDOW
-	Scene scene = new Scene(gridPane);
+	Scene scene = new Scene(gridPane,250,150);
 	scene.getStylesheets().add(STYLE_SHEET_UI);
 	setScene(scene);
     }

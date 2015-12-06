@@ -8,6 +8,7 @@ package EPG.view;
 import EPG.LanguagePropertyType;
 import static EPG.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
 import EPG.controller.FileSelectionController;
+import EPG.controller.ImageChooser;
 import EPG.handler.ErrorHandler;
 import EPG.model.Component;
 import EPG.model.ImageComponent;
@@ -40,9 +41,13 @@ public class ImageEditDialog extends EditDialog {
     public void initView() {
         Label image = new Label("Image");
         imageView = new ImageView();
+        ImageChooser iChooser = new ImageChooser();
         imageView.setOnMouseClicked(e->{
-           FileSelectionController a = new FileSelectionController();
-           a.processFile();
+            String[] temp = iChooser.processSelectImage();
+            if(temp[0]!=null){
+                imgComp.setSrc(temp[0]+temp[1]);
+                updateImage();
+            }
         });
         TextField caption = new TextField("Enter Caption");
         okButton = new Button();
@@ -55,8 +60,14 @@ public class ImageEditDialog extends EditDialog {
         alignmentChoices.add("Left");
         alignmentChoices.add("Middle");
         alignmentChoices.add("Right");
+        
         caption.setText(imgComp.getCaption());
         ComboBox alignment = new ComboBox(alignmentChoices);
+        if(imgComp.getAlignment().equals("")){
+            alignment.getSelectionModel().select(alignmentChoices.get(0));
+        }else{
+            alignment.getSelectionModel().select(imgComp.getAlignment());
+        }
         Label alignmentText = new Label("Alignment");
         Label Caption = new Label("Caption");
         okButton.setOnAction(e->{

@@ -129,16 +129,22 @@ public class SlideShowEditDialog extends Stage{
     public SlideShowEditDialog(Component c, ComponentEditView a) {
 	// FIRST HOLD ONTO THE FILE MANAGER
         slideshow = (SlideShowComponent)c;
+        slideshow.setSlideShowEditDialog(this);
 	componentView = a;
-	// AND THE SITE EXPORTER
-	
-	// MAKE THE DATA MANAGING MODEL
-	slideShow = new SlideShowModel(this);
-
 	// WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
 	errorHandler = new ErrorHandler();
+	
+	// MAKE THE DATA MANAGING MODEL
+        
+	slideShow = slideshow.getSlideShowModel();
+        
+	fileController = new SlideShowFileController(this, fileManager);
+        
         startUI(this, "Edit Slide Show");
         initWindow("Edit Slide Show");
+        
+	fileController.handleNewSlideShowRequest();
+        updateSlideshowEditToolbarControls();
     }
 
     // ACCESSOR METHODS
@@ -164,7 +170,7 @@ public class SlideShowEditDialog extends Stage{
     public void startUI(Stage initPrimaryStage, String windowTitle) {
 	// THE TOOLBAR ALONG THE NORTH
 	initFileToolbar();
-
+        
         // INIT THE CENTER WORKSPACE CONTROLS BUT DON'T ADD THEM
 	// TO THE WINDOW YET
 	initWorkspace();
@@ -207,12 +213,9 @@ public class SlideShowEditDialog extends Stage{
 
     private void initEventHandlers() {
 	// FIRST THE FILE CONTROLS
-	fileController = new SlideShowFileController(this, fileManager);
 	newSlideShowButton.setOnAction(e -> {
 	    fileController.handleNewSlideShowRequest();
-	});
-	loadSlideShowButton.setOnAction(e -> {
-	    fileController.handleLoadSlideShowRequest();
+            updateSlideshowEditToolbarControls();
 	});
 	saveSlideShowButton.setOnAction(e -> {
 	    fileController.handleSaveSlideShowRequest();
@@ -252,8 +255,7 @@ public class SlideShowEditDialog extends Stage{
 	// START AS ENABLED (false), WHILE OTHERS DISABLED (true)
 	PropertiesManager props = PropertiesManager.getPropertiesManager();
 	newSlideShowButton = initChildButton(fileToolbarPane, ICON_NEW_SLIDE_SHOW,	TOOLTIP_NEW_SLIDE_SHOW,	    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-	loadSlideShowButton = initChildButton(fileToolbarPane, ICON_LOAD_SLIDE_SHOW,	TOOLTIP_LOAD_SLIDE_SHOW,    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-	saveSlideShowButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	TOOLTIP_SAVE_SLIDE_SHOW,    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, true);
+        saveSlideShowButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW, TOOLTIP_SAVE_SLIDE_SHOW, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON,false);
 	viewSlideShowButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	TOOLTIP_VIEW_SLIDE_SHOW,    CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, true);
 	exitButton = initChildButton(fileToolbarPane, ICON_EXIT, TOOLTIP_EXIT, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
     }
@@ -275,7 +277,6 @@ public class SlideShowEditDialog extends Stage{
         // SETUP THE UI, NOTE WE'LL ADD THE WORKSPACE LATER
 	ssmPane = new BorderPane();
 	ssmPane.getStyleClass().add(CSS_CLASS_WORKSPACE);
-	ssmPane.setTop(fileToolbarPane);	
 	primaryScene = new Scene(ssmPane);
 	
         // NOW TIE THE SCENE TO THE WINDOW, SELECT THE STYLESHEET
@@ -374,6 +375,7 @@ public class SlideShowEditDialog extends Stage{
 	
 	titleTextField.textProperty().addListener(e -> {
 	    slideShow.setTitle(titleTextField.getText());
+            componentView.reloadComponents();
 	    updateFileToolbarControls(false);
 	});
 	

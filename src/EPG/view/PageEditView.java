@@ -49,6 +49,9 @@ public class PageEditView extends HBox{
 	    String text = captionTextField.getText();
 	    page.setTitle(text);	 
 	    ui.updateFileToolbarControls(false);
+            if(ui.getEPortfolio().isSelectedPage(page)){
+                ui.reloadComponentWorkSpace(page);
+            }
 	});
 	
 	// CHOOSE THE STYLE

@@ -19,6 +19,7 @@ public class Page {
     boolean isSelected;
     private String name = "";
     private String banner = "";
+    private String bannerUrl = "";
     private String footer = "";
     private String color = "";
     private String layout = "";
@@ -30,6 +31,14 @@ public class Page {
 
     public void setFont(String font) {
         this.font = font;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
     
     public String getName() {

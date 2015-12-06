@@ -115,9 +115,10 @@ public class ComponentEditView extends TabPane{
             ChooseComponentDialog chooseComponent = new ChooseComponentDialog(page, this);
             chooseComponent.show();
         });
-        removeButton = new Button();
-        removeButton.setText("Remove");
-        
+        removeButton.setOnAction(e->{
+            page.remove();
+            reloadComponents();
+        });
         
         componentWorkspace.setTop(componentToolbar);
         componentWorkspace.setCenter(scrollPane);
@@ -145,10 +146,6 @@ public class ComponentEditView extends TabPane{
 	webEngine.load(indexURL.toExternalForm());
 	webEngine.setJavaScriptEnabled(true);
 	
-        removeButton.setOnAction(e->{
-            page.remove();
-            reloadComponents();
-        });
         siteViewer.setOnSelectionChanged(e->{
             
         });
