@@ -78,7 +78,9 @@ public class SlideShowModel {
 			    String initCaption) {
 	Slide slideToAdd = new Slide(initImageFileName, initImagePath, initCaption);
 	slides.add(slideToAdd);
-	ui.reloadSlideShowPane();
+        if(ui!=null){
+            ui.reloadSlideShowPane();
+        }
     }
 
     /**

@@ -1,8 +1,9 @@
 
 {
-    "title":"fsadkljf",
+    "title":"sadfdsa",
     "pages":[
         {
+            "page_position":0,
             "page_title":"Hello",
             "banner":"ArchesUtah.jpg",
             "footer":"fsdkljflaskdfjlkjqwer;lkjfsad",
@@ -77,6 +78,7 @@
             ]
         },
         {
+            "page_position":1,
             "page_title":"New Page1",
             "banner":"",
             "footer":"ff",
@@ -86,15 +88,17 @@
             ]
         },
         {
+            "page_position":2,
             "page_title":"New Page2",
             "banner":"",
             "footer":"",
-            "color":"",
-            "layout":"",
+            "color":"Color 1",
+            "layout":"Layout 1",
             "component_array":[
             ]
         },
         {
+            "page_position":3,
             "page_title":"New Page 3",
             "banner":"",
             "footer":"",

@@ -7,6 +7,7 @@ package EPG.manager;
 
 
 
+import static EPG.StartupConstants.PATH_EPORTFOLIO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,7 +29,6 @@ import javax.json.JsonValue;
 import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 import javax.json.stream.JsonGenerator;
-import static EPG.StartupConstants.PATH_SLIDE_SHOWS;
 import EPG.model.Slide;
 import EPG.model.SlideShowModel;
 /**
@@ -78,7 +78,7 @@ public class SlideShowFileManager {
 
 	// INIT THE WRITER
 	String slideShowTitle = "" + slideShowToSave.getTitle();
-	String jsonFilePath = PATH_SLIDE_SHOWS + SLASH + slideShowTitle + JSON_EXT;
+	String jsonFilePath = PATH_EPORTFOLIO + SLASH + slideShowTitle + JSON_EXT;
 	OutputStream os = new FileOutputStream(jsonFilePath);
 	JsonWriter jsonFileWriter = Json.createWriter(os);
 	jsonFileWriter.writeObject(slideShowJsonObject);

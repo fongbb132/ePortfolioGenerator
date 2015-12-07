@@ -3,35 +3,41 @@
     "title":"untitle ePortfolio",
     "pages":[
         {
+            "page_position":0,
             "page_title":"New Page",
-            "banner":"",
+            "banner":"BadlandsSouthDakota.jpg",
+            "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"",
             "color":"Color 1",
             "layout":"Layout 1",
             "component_array":[
                 {
-                    "list_content":"new list component",
-                    "component_type":"l",
-                    "List_component":[
-                        {
-                            "list_item":"dsafkjl"
-                        },
-                        {
-                            "list_item":"dsaklfj"
-                        },
-                        {
-                            "list_item":"flkdsaj"
-                        },
-                        {
-                            "list_item":""
-                        }
-                    ]
+                    "componet_content":"new image component",
+                    "component_type":"p",
+                    "component_src":"./images/slide_show_images//DefaultStartSlide.png",
+                    "image_name":"NO NAME",
+                    "image_caption":"NO CAPTION",
+                    "image_alignment":"Middle",
+                    "image_width":800,
+                    "image_height":600
+                },
+                {
+                    "componet_content":"new video component",
+                    "component_type":"v",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
+                    "video_name":"ToadstoolNebraska.jpg",
+                    "video_caption":"NO CAPTION",
+                    "video_alignment":"Left",
+                    "video_width":800,
+                    "video_height":600
                 }
             ]
         },
         {
+            "page_position":1,
             "page_title":"New Page",
             "banner":"",
+            "banner_url":"",
             "footer":"",
             "color":"",
             "layout":"",
@@ -39,17 +45,21 @@
             ]
         },
         {
+            "page_position":2,
             "page_title":"New Page",
             "banner":"",
+            "banner_url":"",
             "footer":"",
-            "color":"",
-            "layout":"",
+            "color":"Color 1",
+            "layout":"Layout 1",
             "component_array":[
             ]
         },
         {
+            "page_position":3,
             "page_title":"New Page",
             "banner":"",
+            "banner_url":"",
             "footer":"",
             "color":"",
             "layout":"",

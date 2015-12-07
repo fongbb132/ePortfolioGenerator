@@ -18,7 +18,7 @@ public class StartupConstants {
     public static String UI_PROPERTIES_FILE_NAME_Finnish = "properties_FI.xml";
     public static String PROPERTIES_SCHEMA_FILE_NAME = "properties_schema.xsd";
     public static String PATH_DATA = "./data/";
-    public static String PATH_SLIDE_SHOWS = PATH_DATA + "slide_shows/";
+    public static String PATH_EPORTFOLIO = PATH_DATA + "EPortfolio/";
     public static String PATH_IMAGES = "./images/";
     public static String PATH_SITES_WEB = "./sites/public_html/Site 2.html";
     public static String PATH_ICONS = PATH_IMAGES + "icons/";
@@ -27,6 +27,8 @@ public class StartupConstants {
     public static String STYLE_SHEET_UI = PATH_CSS + "StyleSheet.css";
     public static String EPORTFOLIO_PATH = "./data/EPortfolio";
 
+    public static String PATH_SITE = "./sites/";
+    public static String PATH_SAMPLE = PATH_SITE+"sample/";
     // HERE ARE THE LANGUAGE INDEPENDENT GUI ICONS
     public static String ICON_WINDOW_LOGO = "SSM_Logo.png";
     public static String ICON_NEW_SLIDE_SHOW = "New.png";

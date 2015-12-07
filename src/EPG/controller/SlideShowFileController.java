@@ -11,9 +11,9 @@ import javafx.stage.FileChooser;
 import properties_manager.PropertiesManager;
 import EPG.LanguagePropertyType;
 import static EPG.LanguagePropertyType.LABEL_SAVE_UNSAVED_WORK;
+import static EPG.StartupConstants.PATH_EPORTFOLIO;
 import EPG.model.SlideShowModel;
 import EPG.view.SlideShowEditDialog;
-import static EPG.StartupConstants.PATH_SLIDE_SHOWS;
 import EPG.handler.ErrorHandler;
 import EPG.manager.SlideShowFileManager;
 import EPG.view.YesNoCancelDialog;
@@ -223,7 +223,7 @@ public class SlideShowFileController {
     private void promptToOpen() {
         // AND NOW ASK THE USER FOR THE COURSE TO OPEN
         FileChooser slideShowFileChooser = new FileChooser();
-        slideShowFileChooser.setInitialDirectory(new File(PATH_SLIDE_SHOWS));
+        slideShowFileChooser.setInitialDirectory(new File(PATH_EPORTFOLIO));
         File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());
 
         // ONLY OPEN A NEW FILE IF THE USER SAYS OK

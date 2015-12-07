@@ -52,9 +52,9 @@ public class StyleEditPane extends GridPane{
             String[] temp = iChooser.processSelectImage();
             System.out.println(temp[0]);
             if(temp[0]!=null){
+                System.out.println("StyleEditPane:"+temp[0]);
                 page.setBannerUrl(temp[0]);
                 page.setBanner(temp[1]);
-                selectImage.setText(page.getBanner());
             }
         });
         this.add(selectImage, 1,0);

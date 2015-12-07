@@ -32,6 +32,7 @@ public class EPortfolio {
     }
 
     public void addPages(Page p){
+        p.setPosition(pages.size());
         pages.add(p);
     }
     

@@ -1,0 +1,61 @@
+
+{
+    "title":"fdasfdsa",
+    "pages":[
+        {
+            "page_position":0,
+            "page_title":"fsadf",
+            "banner":"BryceCanyonUtah.jpg",
+            "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
+            "footer":"",
+            "color":"Color 1",
+            "layout":"Layout 1",
+            "component_array":[
+            ]
+        },
+        {
+            "page_position":1,
+            "page_title":"fsad",
+            "banner":"BadlandsSouthDakota.jpg",
+            "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
+            "footer":"",
+            "color":"Color 2",
+            "layout":"Layout 2",
+            "component_array":[
+            ]
+        },
+        {
+            "page_position":2,
+            "page_title":"bvbads",
+            "banner":"",
+            "banner_url":"",
+            "footer":"",
+            "color":"Color 1",
+            "layout":"Layout 1",
+            "component_array":[
+            ]
+        },
+        {
+            "page_position":3,
+            "page_title":"New Page",
+            "banner":"",
+            "banner_url":"",
+            "footer":"",
+            "color":"",
+            "layout":"",
+            "component_array":[
+            ]
+        },
+        {
+            "page_position":4,
+            "page_title":"New Page",
+            "banner":"",
+            "banner_url":"",
+            "footer":"",
+            "color":"",
+            "layout":"",
+            "component_array":[
+            ]
+        }
+    ]
+}

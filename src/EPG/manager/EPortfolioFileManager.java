@@ -1,6 +1,5 @@
 package EPG.manager;
 
-import static EPG.StartupConstants.PATH_SLIDE_SHOWS;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -50,10 +49,12 @@ public class EPortfolioFileManager {
     public static String JSON_IMAGE_PATH = "image_path";
     public static String JSON_CAPTION = "caption";
     public static String JSON_BANNER = "banner";
+    public static String JSON_BANNER_URL= "banner_url";
     public static String JSON_FOOTER = "footer";
     public static String JSON_COLOR = "color";
     public static String JSON_LAYOUT = "layout";
     public static String JSON_PAGES = "pages";
+    public static String JSON_FONT = "font";
     public static String JSON_EXT = ".json";
     public static String JSON_COMPONENT_NAME = "component_name";
     public static String JSON_COMPONENT_CONTENT = "componet_content";
@@ -190,8 +191,10 @@ public class EPortfolioFileManager {
     private JsonObject makePageJsonObject(Page page) {
         JsonArray jA = makeComponentJsonArray(page.getComponents());
         JsonObject jso = Json.createObjectBuilder()
+                .add("page_position",page.getPosition())
                 .add(JSON_PAGE_TITLE, page.getTitle())
 		.add(JSON_BANNER, page.getBanner())
+                .add(JSON_BANNER_URL, page.getBannerUrl())
                 .add(JSON_FOOTER, page.getFooter())
                 .add(JSON_COLOR, page.getColor())
                 .add(JSON_LAYOUT, page.getLayout())
@@ -320,7 +323,9 @@ public class EPortfolioFileManager {
             temp.setColor(pageJso.getString(JSON_COLOR));
             temp.setLayout(pageJso.getString(JSON_LAYOUT));
             temp.setBanner(pageJso.getString(JSON_BANNER));
+            temp.setBannerUrl(pageJso.getString(JSON_BANNER_URL));
             temp.setFooter(pageJso.getString(JSON_FOOTER));
+            temp.setPosition(i);
             JsonArray componentArray = pageJso.getJsonArray(JSON_COMPONENT_ARRAY);
             for(int a = 0; a< componentArray.size();a++){
                 JsonObject componentJso = componentArray.getJsonObject(a);
@@ -362,10 +367,21 @@ public class EPortfolioFileManager {
                 else if(componentJso.getString(JSON_COMPONENT_TYPE).equals("t")){
                     ParagraphComponent p = new ParagraphComponent("");
                     String font = componentJso.getString("paragraph_font");
-                    System.out.println(font);
                     p.setFont(componentJso.getString("paragraph_font"));
                     p.setContent(componentJso.getString(JSON_COMPONENT_CONTENT));
                     temp.addComponent(p);
+                }else if(componentJso.getString(JSON_COMPONENT_TYPE).equals("s")){
+                    SlideShowComponent s = new SlideShowComponent("",null);
+                    s.setTitle(componentJso.getString(JSON_COMPONENT_CONTENT));
+                    JsonArray listArray = componentJso.getJsonArray("slideshow");
+                    for(int b = 0; b<listArray.size();b++){
+                        JsonObject listJso = listArray.getJsonObject(b);
+                        System.out.println(listJso.getString("image_file_name")+" "+listJso.getString("image_path")+" "+  listJso.getString("caption"));
+                        s.addSlide(listJso.getString("image_file_name"),
+                                listJso.getString("image_path"),
+                                listJso.getString("caption"));
+                    }
+                    temp.addComponent(s);
                 }
             }
             portfolioToLoad.addPages(temp);

@@ -44,6 +44,7 @@ import EPG.controller.FileController;
 import EPG.controller.PortfolioController;
 import EPG.handler.ErrorHandler;
 import EPG.manager.EPortfolioFileManager;
+import EPG.manager.createNameSiteController;
 import EPG.model.EPortfolio;
 import EPG.model.Page;
 import java.io.IOException;
@@ -111,12 +112,14 @@ public class EPortfolioView {
 
     private FileController fileController;
     private PortfolioController editController;
+    createNameSiteController createSiteController;
     
     public EPortfolioView(EPortfolioFileManager fileManager) {
         this.fileManager = fileManager;
         ePortfolio = new EPortfolio("Untitled ePortfolio",this);
         errorHandler = new ErrorHandler();
 	studentTextField = new TextField();
+        createSiteController = new createNameSiteController(this);
         studentTextField.setText(ePortfolio.getName());
     }
 
@@ -221,6 +224,7 @@ public class EPortfolioView {
             EPortfolioFileManager fileManager = new EPortfolioFileManager();
             try {
                 fileManager.saveEPortfolio(ePortfolio);
+                createSiteController.copySampleSite();
                 System.out.println("SLIDE SHOW SAVED");
             }
             catch(IOException ioe) {

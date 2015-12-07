@@ -21,7 +21,6 @@ public class SlideShowComponent extends Component{
         super(n);
         slideshowModel = new SlideShowModel(a);
     }
-    
 
     public String getType(){
         return type;

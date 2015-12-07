@@ -21,9 +21,10 @@ public class Page {
     private String banner = "";
     private String bannerUrl = "";
     private String footer = "";
-    private String color = "";
-    private String layout = "";
-    private String font = "";
+    private String color = "Color 1";
+    private String layout = "Layout 1";
+    private String font = "Font 1";
+    private int position = -1;
 
     public String getFont() {
         return font;
@@ -56,7 +57,9 @@ public class Page {
     public void setBanner(String banner) {
         this.banner = banner;
     }
-
+    public int getPosition(){
+        return position;
+    }
     public String getFooter() {
         return footer;
     }
@@ -84,6 +87,9 @@ public class Page {
     public Page(String title) {
         components = new ArrayList<Component>();
         this.title = title;
+    }
+    public void setPosition(int pos){
+        position = pos;
     }
 
     public void addComponent(Component c){

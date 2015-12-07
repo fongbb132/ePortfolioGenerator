@@ -7,7 +7,6 @@ package EPG.controller;
 
 import EPG.LanguagePropertyType;
 import static EPG.LanguagePropertyType.LABEL_SAVE_UNSAVED_WORK;
-import static EPG.StartupConstants.PATH_SLIDE_SHOWS;
 import EPG.handler.ErrorHandler;
 import EPG.manager.EPortfolioFileManager;
 import EPG.model.EPortfolio;
