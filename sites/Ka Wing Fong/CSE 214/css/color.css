@@ -1,0 +1,44 @@
+/* Initial body */
+body {
+  background: #6600CC;
+}
+
+.page h2,.page p ,#slideshow_controls h, #slideshow_controls h2{
+  color:#C6FFF1 ;
+}
+
+.page h2,#slideshow_controls h, #slideshow_controls h2{
+  color:#C6FFF1;
+}
+
+.eportfolio_name{
+  color:#C6FFF1;
+}
+
+.menu {
+  background: #6600CC;
+}
+
+.menu a {
+  color:#C6FFF1;
+}
+
+.menu a:hover{
+    color:black;
+}
+
+.footer {
+  background-color: #FFE1C3 ;
+  color:black;
+}
+.nav-tabs{
+    border-bottom-color: #6600CC;
+}
+
+a{
+    color:#EBB000; 
+}
+
+a:hover{
+    color:white;
+}

@@ -150,7 +150,7 @@ $.ajax({
 
     		if(page_pos == value.page_position){
                 $(".foot").text(value.footer);
-                $(".banner img").attr('src',value.banner);
+                $(".banner img").attr('src',"./img/"+value.banner);
     			$(value.component_array).each(function(index1, value1){
     				if(value1.component_type=="v"){
     					var $video = $('<video>',{"controls":{}});
@@ -167,7 +167,7 @@ $.ajax({
     					$(".page").append($paragraph);
     				}
     				if(value1.component_type=="p"){
-    					var $picture = $('<img>',{"src":value1.component_src});
+    					var $picture = $('<img>',{"src":"./img/"+value1.component_src});
     					var $pictureCaption = $('<h2>',{});
     					$pictureCaption.text(value1.componet_content);
     					$(".page").append($picture);

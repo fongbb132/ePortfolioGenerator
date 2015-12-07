@@ -1,0 +1,33 @@
+/* Initial body */
+body {
+  background: #E5CCFF;
+}
+
+.page h2,.page p ,#slideshow_controls h, #slideshow_controls h2{
+  color:#002DB5 ;
+}
+
+.page h2,#slideshow_controls h, #slideshow_controls h2{
+  color:#002DB5 ;
+}
+
+.menu {
+  background:#E5CCFF;
+}
+
+.menu li {
+  border-bottom: 1px solid white;
+}
+
+.menu ul{
+  border-top: 1px solid white;
+}
+
+
+.menu a {
+  color:#002DB5;
+}
+
+.footer {
+  background-color: #FF8282 ;
+}

@@ -7,10 +7,35 @@
             "page_title":"fsadf",
             "banner":"BryceCanyonUtah.jpg",
             "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
-            "footer":"",
+            "footer":"fdsavcvdoaif",
             "color":"Color 1",
             "layout":"Layout 1",
             "component_array":[
+                {
+                    "componet_content":"",
+                    "component_type":"p",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/QuirponIslandNewfoundland.jpg",
+                    "image_name":"NO NAME",
+                    "image_caption":"fdsaf",
+                    "image_alignment":"Middle",
+                    "image_width":800,
+                    "image_height":600
+                },
+                {
+                    "componet_content":"dfasdfvzafsd",
+                    "component_type":"t",
+                    "paragraph_font":"Font 1"
+                },
+                {
+                    "componet_content":"",
+                    "component_type":"v",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/video/",
+                    "video_name":"SampleVideo_1080x720_1mb.mp4",
+                    "video_caption":"fdsa",
+                    "video_alignment":"Left",
+                    "video_width":1120,
+                    "video_height":231
+                }
             ]
         },
         {
@@ -22,13 +47,24 @@
             "color":"Color 2",
             "layout":"Layout 2",
             "component_array":[
+                {
+                    "componet_content":"lmao",
+                    "component_type":"s",
+                    "slideshow":[
+                        {
+                            "image_file_name":"OregonTrailNebraska.jpg",
+                            "image_path":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
+                            "caption":"fasd"
+                        }
+                    ]
+                }
             ]
         },
         {
             "page_position":2,
             "page_title":"bvbads",
-            "banner":"",
-            "banner_url":"",
+            "banner":"YosemiteCalifornia.jpg",
+            "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"",
             "color":"Color 1",
             "layout":"Layout 1",

@@ -45,6 +45,7 @@ public class ImageEditDialog extends EditDialog {
         imageView.setOnMouseClicked(e->{
             String[] temp = iChooser.processSelectImage();
             if(temp[0]!=null){
+                imgComp.setName(temp[1]);
                 imgComp.setSrc(temp[0]+temp[1]);
                 updateImage();
             }

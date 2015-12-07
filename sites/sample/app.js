@@ -150,11 +150,13 @@ $.ajax({
 
     		if(page_pos == value.page_position){
                 $(".foot").text(value.footer);
-                $(".banner img").attr('src',value.banner);
+                $(".banner img").attr('src',"./img/"+value.banner);
     			$(value.component_array).each(function(index1, value1){
     				if(value1.component_type=="v"){
     					var $video = $('<video>',{"controls":{}});
     					var $source = $('<source>', {"src":"./video/"+value1.video_name});
+                                        $video.width = value1.video_width;
+                                        $video.height=value1.video_height;
     					$video.append($source);
     					var $videoCaption = $('<h2>',{});
     					$videoCaption.text(value1.componet_content);
@@ -167,7 +169,8 @@ $.ajax({
     					$(".page").append($paragraph);
     				}
     				if(value1.component_type=="p"){
-    					var $picture = $('<img>',{"src":value1.component_src});
+    					var $picture = $('<img>',{"src":"./img/"+value1.image_name});
+                                        $picture.width(value1.image_width).height(value1.image_height);
     					var $pictureCaption = $('<h2>',{});
     					$pictureCaption.text(value1.componet_content);
     					$(".page").append($picture);

@@ -125,7 +125,6 @@ public class EPortfolioView {
 
     public ErrorHandler getErrorHandler() {
         return errorHandler;
-        
     }
 
     public void startUI(Stage primaryStage, String title) {
@@ -231,7 +230,7 @@ public class EPortfolioView {
                 ioe.printStackTrace();
                 System.exit(-1);
             }
-            SiteViewer siteView = new SiteViewer(this);
+            SiteViewer siteView = new SiteViewer(this,-1);
             try {
                 siteView.startSiteView();
             } catch (MalformedURLException ex) {
@@ -343,7 +342,7 @@ public class EPortfolioView {
     
     public void reloadComponentWorkSpace(Page page){
         componentEditVBox.getChildren().clear();
-        ComponentEditView newEdit = new ComponentEditView(page);
+        ComponentEditView newEdit = new ComponentEditView(page,this);
         newEdit.getStylesheets().add(STYLE_SHEET_UI);
         newEdit.reloadComponents();
         componentEditVBox.getChildren().add(newEdit);

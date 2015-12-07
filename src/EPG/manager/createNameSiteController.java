@@ -33,6 +33,7 @@ public class createNameSiteController {
     public createNameSiteController(EPortfolioView initUI) {
         UI = initUI;
     }
+
     
     public void copySampleSite() throws IOException{
         String title = UI.getEPortfolio().getName();
@@ -47,7 +48,8 @@ public class createNameSiteController {
         FileUtils.copyFileToDirectory(jsonFile, toFile);
         File newJsonFile = new File(toPath+title+".json");
         newJsonFile.renameTo(new File(toPath+"data.json"));
-        
+        File icons = new File(PATH_SAMPLE+"icons");
+        FileUtils.copyDirectoryToDirectory(icons, toFile);
         for(Page p:portfolio.getPages()){
             File fromFile = new File(PATH_SAMPLE+"sample.html");
             FileUtils.copyFileToDirectory(fromFile, toFile);
@@ -61,12 +63,12 @@ public class createNameSiteController {
             FileUtils.copyFileToDirectory(fromFile, newJSToPath);
             replaceJavaScriptWord(fromFile.toString(),newJSToPath+"/app.js",p.getPosition());
             
+            
             File temp2;
             if(p.getColor().equals("Color 1")){
                 fromFile = new File(PATH_SAMPLE+"CSS/color1.css");
                 FileUtils.copyFileToDirectory(fromFile,newCSSToPath);
                 temp1 = new File(newCSSToPath.toString()+"/color.css");
-                System.out.println(temp1.toString());
                 temp2 = new File(newCSSToPath.toString()+"/color1.css");
                 temp2.renameTo(temp1);
             }else if(p.getColor().equals("Color 2")){
@@ -92,6 +94,12 @@ public class createNameSiteController {
                 FileUtils.copyFileToDirectory(fromFile,newCSSToPath);
                 temp1 = new File(newCSSToPath.toString()+"/color.css");
                 temp2 = new File(newCSSToPath.toString()+"/color5.css");
+                temp2.renameTo(temp1);
+            }else{
+                fromFile = new File(PATH_SAMPLE+"CSS/color1.css");
+                FileUtils.copyFileToDirectory(fromFile,newCSSToPath);
+                temp1 = new File(newCSSToPath.toString()+"/color.css");
+                temp2 = new File(newCSSToPath.toString()+"/color1.css");
                 temp2.renameTo(temp1);
             }
             
@@ -127,6 +135,13 @@ public class createNameSiteController {
                 temp1 = new File(newCSSToPath.toString()+"/style.css");
                 temp2 = new File(newCSSToPath.toString()+"/style5.css");
                 temp2.renameTo(temp1);
+            }else{
+                fromFile = new File(PATH_SAMPLE+"CSS/style1.css");
+                FileUtils.copyFileToDirectory(fromFile,newCSSToPath);
+                temp1 = new File(newCSSToPath.toString()+"/style.css");
+                System.out.println(temp1.toString());
+                temp2 = new File(newCSSToPath.toString()+"/style1.css");
+                temp2.renameTo(temp1);
             }
             
              if(p.getFont().equals("Font 1")){
@@ -160,6 +175,12 @@ public class createNameSiteController {
                 temp1 = new File(newCSSToPath.toString()+"/font.css");
                 temp2 = new File(newCSSToPath.toString()+"/font5.css");
                 temp2.renameTo(temp1);
+            }else{
+                fromFile = new File(PATH_SAMPLE+"CSS/font5.css");
+                FileUtils.copyFileToDirectory(fromFile,newCSSToPath);
+                temp1 = new File(newCSSToPath.toString()+"/font.css");
+                temp2 = new File(newCSSToPath.toString()+"/font5.css");
+                temp2.renameTo(temp1);
             }
             
             if(!p.getBannerUrl().equals("")){
@@ -167,6 +188,7 @@ public class createNameSiteController {
                 File imgFile1 = new File(toPath + "img/");
                 FileUtils.copyFileToDirectory(picture1, imgFile1);
             }
+            
             for(Component a: p.getComponents()){
                 if(a instanceof ImageComponent){
                     ImageComponent temp = (ImageComponent)a;

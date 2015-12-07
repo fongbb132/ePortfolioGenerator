@@ -1,0 +1,39 @@
+/* Initial body */
+body {
+  background: #4F301E;
+}
+
+.menu li {
+  line-height: 45px;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 3px;
+}
+
+
+.page h2,.page p ,#slideshow_controls h, #slideshow_controls h2{
+  color:#E2C25B ;
+}
+
+.page h2,#slideshow_controls h, #slideshow_controls h2{
+  color:#E2C25B ;
+}
+
+.menu {
+  background: #4F301E;
+}
+
+.menu a {
+  color: #E2C25B;
+}
+
+.footer {
+  background-color: rgb(72,72,72) ;
+}
+
+.page a{
+    color: #E5CCFF;
+}
+.page a:hover{
+    color: appworkspace;
+}

@@ -22,9 +22,13 @@ import static EPG.StartupConstants.ICON_ADD;
 import static EPG.StartupConstants.ICON_REMOVE;
 import static EPG.StartupConstants.PATH_ICONS;
 import static EPG.StartupConstants.STYLE_SHEET_UI;
+import EPG.controller.createSiteController;
+import EPG.manager.EPortfolioFileManager;
+import EPG.manager.createNameSiteController;
 import EPG.model.Component;
 import EPG.model.Page;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -60,8 +64,10 @@ public class ComponentEditView extends TabPane{
     Page page;
     Button addComponentButton;
     ScrollPane scrollPane ;
+    EPortfolioView ui;
 
-    public ComponentEditView(Page page) {
+    ComponentEditView(Page page, EPortfolioView aThis) {
+        ui = aThis;
         Label siteName = new Label(page.getTitle());
         scrollPane =new  ScrollPane(componentWorkspace);
         scrollPane.getStyleClass().add(CSS_CLASS_BACKGROUND);
@@ -129,25 +135,44 @@ public class ComponentEditView extends TabPane{
         webview.getStyleClass().add(CSS_CLASS_BACKGROUND);
         
 	scrollPane = new ScrollPane(webview);
+	scrollPane.setFitToWidth(true);
+	scrollPane.setFitToHeight(true);
 	scrollPane.getStyleClass().add(CSS_CLASS_BACKGROUND);
 	// GET THE URL
-	String indexPath = "./sites/public_html/Site 2.html";
-        System.out.println(indexPath);
-	File indexFile = new File(indexPath);
-	URL indexURL = null;
-        try {
-            indexURL = indexFile.toURI().toURL();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
 	
-	// SETUP THE WEB ENGINE AND LOAD THE URL
-	WebEngine webEngine = webview.getEngine();
-	webEngine.load(indexURL.toExternalForm());
-	webEngine.setJavaScriptEnabled(true);
+	// SET THE WINDOW TITLE
 	
         siteViewer.setOnSelectionChanged(e->{
-            
+            EPortfolioFileManager fileManager = new EPortfolioFileManager();
+            try {
+                fileManager.saveEPortfolio(ui.getEPortfolio());
+            } catch (IOException ex) {
+                Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            createNameSiteController createSiteController = new createNameSiteController(ui);
+            try {
+                createSiteController.copySampleSite();
+            } catch (IOException ex) {
+                Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("SLIDE SHOW SAVED");
+            String indexPath;
+            indexPath = "./sites/"+ui.getEPortfolio().getName()+"/"+ui.getEPortfolio().getPages().get(page.getPosition()).getTitle()+".html";
+
+            File indexFile = new File(indexPath);
+            URL indexURL=null;
+            try {
+                indexURL = indexFile.toURI().toURL();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            // SETUP THE WEB ENGINE AND LOAD THE URL
+            WebEngine webEngine = webview.getEngine();
+            webEngine.load(indexURL.toExternalForm());
+            webEngine.setJavaScriptEnabled(true);
         });
         siteViewer.setContent(webview);
         siteViewer.setText(props.getProperty(SITE_VIEWER));

@@ -26,20 +26,28 @@ public class SiteViewer extends Stage{
     ScrollPane scrollPane;
     WebView webView;
     WebEngine webEngine;
-    
+    int pos=-1;
     EPortfolioView ePortfolioView;
 
-    public SiteViewer(EPortfolioView ePortfolioView) {
+    public SiteViewer(EPortfolioView ePortfolioView,int p) {
         this.ePortfolioView = ePortfolioView;
+        pos = p;
     }
    
     public void startSiteView() throws MalformedURLException {
 	// SETUP THE UI
 	webView = new WebView();
 	scrollPane = new ScrollPane(webView);
+	scrollPane.setFitToWidth(true);
+	scrollPane.setFitToHeight(true);
 	
 	// GET THE URL
-	String indexPath = "./sites/public_html/Site 2.html";
+        String indexPath;
+        if(pos<0){
+	indexPath = "./sites/"+ePortfolioView.getEPortfolio().getName()+"/"+ePortfolioView.getEPortfolio().getPages().get(0).getTitle()+".html";
+        }else{
+	indexPath = "./sites/"+ePortfolioView.getEPortfolio().getName()+"/"+ePortfolioView.getEPortfolio().getPages().get(pos).getTitle()+".html";
+        }
 	File indexFile = new File(indexPath);
 	URL indexURL = indexFile.toURI().toURL();
 	
@@ -52,7 +60,7 @@ public class SiteViewer extends Stage{
 	this.setTitle(ePortfolioView.getEPortfolio().getName());
 
 	// NOW PUT STUFF IN THE STAGE'S SCENE
-	Scene scene = new Scene(webView, 1100, 650);
+	Scene scene = new Scene(scrollPane, 1100, 650);
 	setScene(scene);
 	this.showAndWait();
     }
