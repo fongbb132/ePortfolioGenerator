@@ -1,4 +1,4 @@
-var page_pos=******;
+var page_pos=2;
 var IMG_PATH;
 var ICON_PATH;
 var IMG_WIDTH;

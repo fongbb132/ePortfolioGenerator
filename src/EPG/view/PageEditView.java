@@ -58,6 +58,8 @@ public class PageEditView extends HBox{
 	siteLabel.getStyleClass().add(CSS_CLASS_CAPTION_PROMPT);
 	captionTextField.getStyleClass().add(CSS_CLASS_CAPTION_TEXT_FIELD);
         this.setOnMouseClicked(e->{
+            ui.removeButton.setDisable(false);
+	    ui.updateFileToolbarControls(false);
             ui.reloadComponentWorkSpace(page);
         });
     }

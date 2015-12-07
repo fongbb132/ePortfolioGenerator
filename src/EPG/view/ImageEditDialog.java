@@ -58,9 +58,9 @@ public class ImageEditDialog extends EditDialog {
         TextField height = new TextField();
         height.setText(imgComp.getHeight()+"");
         ObservableList<String> alignmentChoices = FXCollections.observableArrayList();
-        alignmentChoices.add("Left");
-        alignmentChoices.add("Middle");
-        alignmentChoices.add("Right");
+        alignmentChoices.add("left");
+        alignmentChoices.add("center");
+        alignmentChoices.add("right");
         
         caption.setText(imgComp.getCaption());
         ComboBox alignment = new ComboBox(alignmentChoices);

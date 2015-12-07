@@ -4,7 +4,7 @@
     "pages":[
         {
             "page_position":0,
-            "page_title":"CSE 219",
+            "page_title":"CSE219",
             "banner":"BryceCanyonUtah.jpg",
             "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"Take your time and drink a coffee",
@@ -18,28 +18,37 @@
                     "video_name":"SampleVideo_1080x720_1mb.mp4",
                     "video_caption":"Good mp4",
                     "video_alignment":"Left",
-                    "video_width":100,
-                    "video_height":1000
+                    "video_width":300,
+                    "video_height":400
                 },
                 {
                     "componet_content":"Picture",
                     "component_type":"h"
                 },
                 {
-                    "componet_content":"",
+                    "componet_content":"I don't know where it is",
                     "component_type":"p",
-                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/BadlandsSouthDakota.jpg",
-                    "image_name":"NO NAME",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/ArchesUtah.jpg",
+                    "image_name":"ArchesUtah.jpg",
                     "image_caption":"I don't know where it is",
                     "image_alignment":"Middle",
                     "image_width":800,
                     "image_height":600
+                },
+                {
+                    "componet_content":"raksldfjsadlkf;lskvjlaasd",
+                    "component_type":"t",
+                    "paragraph_font":"Font 1"
+                },
+                {
+                    "componet_content":"Hello",
+                    "component_type":"h"
                 }
             ]
         },
         {
             "page_position":1,
-            "page_title":"Writing 102",
+            "page_title":"Writing102",
             "banner":"ArchesUtah.jpg",
             "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"Sorry sir",
@@ -68,57 +77,107 @@
                     ]
                 },
                 {
-                    "componet_content":"",
+                    "componet_content":"ads",
                     "component_type":"p",
                     "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/ArchesUtah.jpg",
-                    "image_name":"NO NAME",
+                    "image_name":"ArchesUtah.jpg",
                     "image_caption":"ads",
-                    "image_alignment":"Middle",
-                    "image_width":4323,
-                    "image_height":234
+                    "image_alignment":"center",
+                    "image_width":800,
+                    "image_height":500
                 }
             ]
         },
         {
             "page_position":2,
-            "page_title":"CSE 214",
+            "page_title":"CSE214",
             "banner":"ToadstoolNebraska.jpg",
             "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"....",
             "color":"Color 4",
             "layout":"Layout 2",
             "component_array":[
+                {
+                    "componet_content":"Picture of the year",
+                    "component_type":"h"
+                },
+                {
+                    "componet_content":"picture",
+                    "component_type":"p",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/GrosMorneNewfoundland.jpg",
+                    "image_name":"GrosMorneNewfoundland.jpg",
+                    "image_caption":"picture",
+                    "image_alignment":"center",
+                    "image_width":500,
+                    "image_height":400
+                },
+                {
+                    "componet_content":"another picture",
+                    "component_type":"p",
+                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/ArchesUtah.jpg",
+                    "image_name":"ArchesUtah.jpg",
+                    "image_caption":"another picture",
+                    "image_alignment":"center",
+                    "image_width":400,
+                    "image_height":300
+                }
             ]
         },
         {
             "page_position":3,
-            "page_title":"CDT 208",
+            "page_title":"CDT208 ",
             "banner":"BadlandsSouthDakota.jpg",
             "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"Don't spend too much time on 219",
             "color":"Color 4",
             "layout":"Layout 1",
             "component_array":[
+                {
+                    "list_content":"",
+                    "component_type":"l",
+                    "List_component":[
+                        {
+                            "list_item":"Photoshop Project"
+                        },
+                        {
+                            "list_item":"Music Project"
+                        },
+                        {
+                            "list_item":"Web design Project"
+                        }
+                    ]
+                }
             ]
         },
         {
             "page_position":4,
-            "page_title":"I don't know",
+            "page_title":"SlideShow",
             "banner":"BryceCanyonUtah.jpg",
             "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"Life is short",
-            "color":"Color 1",
-            "layout":"Layout 1",
+            "color":"Color 2",
+            "layout":"Layout 4",
             "component_array":[
                 {
-                    "componet_content":"",
-                    "component_type":"v",
-                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
-                    "video_name":"YosemiteCalifornia.jpg",
-                    "video_caption":"NO CAPTION",
-                    "video_alignment":"Left",
-                    "video_width":800,
-                    "video_height":600
+                    "componet_content":"Nice Slideshow",
+                    "component_type":"s",
+                    "slideshow":[
+                        {
+                            "image_file_name":"BryceCanyonUtah.jpg",
+                            "image_path":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
+                            "caption":"p1"
+                        },
+                        {
+                            "image_file_name":"ToadstoolNebraska.jpg",
+                            "image_path":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
+                            "caption":"p2"
+                        },
+                        {
+                            "image_file_name":"SignalHillNewfoundland.jpg",
+                            "image_path":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
+                            "caption":"p3"
+                        }
+                    ]
                 }
             ]
         }

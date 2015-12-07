@@ -26,7 +26,7 @@
                     "component_type":"h"
                 },
                 {
-                    "componet_content":"I don't know where it is",
+                    "componet_content":"",
                     "component_type":"p",
                     "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/ArchesUtah.jpg",
                     "image_name":"ArchesUtah.jpg",
@@ -77,7 +77,7 @@
                     ]
                 },
                 {
-                    "componet_content":"ads",
+                    "componet_content":"",
                     "component_type":"p",
                     "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/ArchesUtah.jpg",
                     "image_name":"ArchesUtah.jpg",
@@ -98,28 +98,8 @@
             "layout":"Layout 2",
             "component_array":[
                 {
-                    "componet_content":"Picture of the year",
+                    "componet_content":"qqq",
                     "component_type":"h"
-                },
-                {
-                    "componet_content":"picture",
-                    "component_type":"p",
-                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/GrosMorneNewfoundland.jpg",
-                    "image_name":"GrosMorneNewfoundland.jpg",
-                    "image_caption":"picture",
-                    "image_alignment":"center",
-                    "image_width":500,
-                    "image_height":400
-                },
-                {
-                    "componet_content":"another picture",
-                    "component_type":"p",
-                    "component_src":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/ArchesUtah.jpg",
-                    "image_name":"ArchesUtah.jpg",
-                    "image_caption":"another picture",
-                    "image_alignment":"center",
-                    "image_width":400,
-                    "image_height":300
                 }
             ]
         },
@@ -132,21 +112,6 @@
             "color":"Color 4",
             "layout":"Layout 1",
             "component_array":[
-                {
-                    "list_content":"",
-                    "component_type":"l",
-                    "List_component":[
-                        {
-                            "list_item":"Photoshop Project"
-                        },
-                        {
-                            "list_item":"Music Project"
-                        },
-                        {
-                            "list_item":"Web design Project"
-                        }
-                    ]
-                }
             ]
         },
         {
@@ -156,7 +121,7 @@
             "banner_url":"/Users/wing/NetBeansProjects/ePortfolioGenerator/images/slide_show_images/",
             "footer":"Life is short",
             "color":"Color 2",
-            "layout":"Layout 4",
+            "layout":"Layout 3",
             "component_array":[
                 {
                     "componet_content":"Nice Slideshow",

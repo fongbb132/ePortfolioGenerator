@@ -67,7 +67,7 @@ public class VideoEditDialog extends EditDialog{
         
         ObservableList<String> alignmentChoices = FXCollections.observableArrayList();
         alignmentChoices.add("Left");
-        alignmentChoices.add("Middle");
+        alignmentChoices.add("center");
         alignmentChoices.add("Right");
         ComboBox alignment = new ComboBox(alignmentChoices);
         alignment.getSelectionModel().select(alignmentChoices.get(0));

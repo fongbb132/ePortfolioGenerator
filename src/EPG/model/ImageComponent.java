@@ -58,6 +58,8 @@ public class ImageComponent extends Component{
     }
 
     public String getName() {
+        String[] temp = src.split("/");
+        name = temp[temp.length-1];
         return name;
     }
 

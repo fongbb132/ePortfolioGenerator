@@ -47,6 +47,8 @@ import EPG.manager.EPortfolioFileManager;
 import EPG.manager.createNameSiteController;
 import EPG.model.EPortfolio;
 import EPG.model.Page;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
@@ -65,6 +67,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import properties_manager.PropertiesManager;
@@ -164,9 +167,9 @@ public class EPortfolioView {
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         newPortfolioButton = initChildButton(fileToolbarPane, ICON_NEW_PORTFOLIO, TOOLTIP_NEW_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
         loadPortfolioButton = initChildButton(fileToolbarPane, ICON_LOAD_PORTFOLIO, TOOLTIP_LOAD_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-        savePortfolioButton = initChildButton(fileToolbarPane, ICON_SAVE_PORTFOLIO, TOOLTIP_SAVE_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-        saveAsButton = initChildButton(fileToolbarPane, ICON_SAVE_AS, TOOLTIP_SAVE_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
-        viewPortfolioButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW, SITE_VIEWER, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
+        savePortfolioButton = initChildButton(fileToolbarPane, ICON_SAVE_PORTFOLIO, TOOLTIP_SAVE_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, true);
+        saveAsButton = initChildButton(fileToolbarPane, ICON_SAVE_AS, TOOLTIP_SAVE_PORTFOLIO, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON,true);
+        viewPortfolioButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW, SITE_VIEWER, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, true);
         exitButton = initChildButton(fileToolbarPane, ICON_EXIT, TOOLTIP_EXIT, CSS_CLASS_HORIZONTAL_TOOLBAR_BUTTON, false);
     }
 
@@ -203,9 +206,15 @@ public class EPortfolioView {
     private void initEventHandlers() {
         fileController = new FileController(this, fileManager);
         newPortfolioButton.setOnAction(e->{
+            this.viewPortfolioButton.setDisable(false);
+            this.saveAsButton.setDisable(false);
+            this.savePortfolioButton.setDisable(false);
             fileController.handleNewPortfolioRequest();
         });
         loadPortfolioButton.setOnAction(e->{
+            this.viewPortfolioButton.setDisable(false);
+            this.saveAsButton.setDisable(false);
+            this.savePortfolioButton.setDisable(false);
             fileController.handleLoadEportfolioRequest();
         });
         savePortfolioButton.setOnAction(e->{
@@ -213,7 +222,18 @@ public class EPortfolioView {
         });
         
         saveAsButton.setOnAction(e->{
-            fileController.handleSaveEPortfolioRequest();
+            FileChooser fileChooser = new FileChooser();
+  
+              //Set extension filter
+              FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+              fileChooser.getExtensionFilters().add(extFilter);
+              
+              //Show save file dialog
+              File file = fileChooser.showSaveDialog(primaryStage);
+              
+              if(file != null){
+                  fileController.handSaveAsPortfolioRequest(file.toString());
+              }
         });
         
         exitButton.setOnAction(e->{
@@ -261,6 +281,7 @@ public class EPortfolioView {
             }
 	    pagesEditorPane.getChildren().add(pageEditor);
 	    pageEditor.setOnMousePressed(e -> {
+                removeButton.setDisable(false);
 		ePortfolio.setSelectedPage(page);
 		this.reloadPagePane();
 	    });
@@ -319,9 +340,6 @@ public class EPortfolioView {
 	// FIRST MAKE SURE THE WORKSPACE IS THERE
 	totalPane.setCenter(workspace);
 	
-	// NEXT ENABLE/DISABLE BUTTONS AS NEEDED IN THE FILE TOOLBAR
-	savePortfolioButton.setDisable(saved);
-	
 	updatePortfolioEditToolbarControls();
     }
     
@@ -350,5 +368,18 @@ public class EPortfolioView {
 
     public void clearEditPageView() {
         componentEditVBox.getChildren().clear();
+    }
+    
+     private void SaveFile(String content, File file){
+        try {
+            FileWriter fileWriter = null;
+             
+            fileWriter = new FileWriter(file);
+            fileWriter.write(content);
+            fileWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(JavaFX_Text.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
     }
 }

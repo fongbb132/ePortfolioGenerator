@@ -123,6 +123,38 @@ public class EPortfolioFileManager {
 	pw.close();
 	System.out.println(prettyPrinted);
     }
+    
+    public void saveEPortfolio(EPortfolio ePortfolioToSave,String path) throws IOException {
+	StringWriter sw = new StringWriter();
+
+	// BUILD THE SLIDES ARRAY
+	JsonArray pagesJsonArray = makePageJsonArray(ePortfolioToSave.getPages());
+        
+	// NOW BUILD THE COURSE USING EVERYTHING WE'VE ALREADY MADE
+	JsonObject ePortfolioJsonObject = Json.createObjectBuilder()
+		.add(JSON_TITLE, ePortfolioToSave.getName())
+                .add(JSON_PAGES, pagesJsonArray)
+		.build();
+
+	Map<String, Object> properties = new HashMap<>(1);
+	properties.put(JsonGenerator.PRETTY_PRINTING, true);
+
+	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(ePortfolioJsonObject);
+	jsonWriter.close();
+
+	// INIT THE WRITER
+	String jsonFilePath = path;
+	OutputStream os = new FileOutputStream(jsonFilePath);
+	JsonWriter jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(ePortfolioJsonObject);
+	String prettyPrinted = sw.toString();
+	PrintWriter pw = new PrintWriter(jsonFilePath);
+	pw.write(prettyPrinted);
+	pw.close();
+	System.out.println(prettyPrinted);
+    }
 
     /**
      * This method loads the contents of a JSON file representing a slide show
@@ -246,7 +278,7 @@ public class EPortfolioFileManager {
         JsonObject jso;
         if(component instanceof ImageComponent){
             jso = Json.createObjectBuilder()
-                    .add(JSON_COMPONENT_CONTENT, ((ImageComponent)component).getContent())
+                    .add(JSON_COMPONENT_CONTENT, ((ImageComponent)component).getCaption())
                     .add(JSON_COMPONENT_TYPE,((ImageComponent)component).getType())
                     .add(JSON_COMPONENT_SRC, ((ImageComponent)component).getSrc())
                     .add(JSON_IMAGE_NAME, ((ImageComponent)component).getName())
